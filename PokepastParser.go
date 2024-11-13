@@ -80,7 +80,8 @@ var nameMap = map[string]string{
 	"basculegion":           "basculegion-male",
 	"basculegion-f":         "basculegion-female",
 	//casting all the colors of minior doesn't matter, we only need the type
-	"minior": "minior-red",
+	"minior":  "minior-red",
+	"mimikyu": "mimikyu-disguised",
 	//TODO
 }
 
