@@ -28,48 +28,48 @@ func CoreReport(team []Pokemon) string {
 		}
 	}
 	report := strings.Builder{}
-	report.WriteString("\n\nCore report \n -----------------------------\n")
+	//report.WriteString("\n\nCore report \n -----------------------------\n")
 	fwg := false
 	dfs := false
 	pdf := false
 	if fwgSet.Cardinality() == 3 {
-		report.WriteString("Fire-Water-Grass core detected. \n")
+		report.WriteString("\nFire-Water-Grass core detected. ")
 		fwg = true
 	}
 	if fantasySet.Cardinality() == 3 {
-		report.WriteString("Dragon-Fairy-Steel core detected. \n")
+		report.WriteString("\nDragon-Fairy-Steel core detected. ")
 		dfs = true
 	}
 	if PDFSet.Cardinality() == 3 {
-		report.WriteString("Psychic-Dark-Fighting core detected. \n")
+		report.WriteString("\nPsychic-Dark-Fighting core detected. ")
 		pdf = true
 	}
 
 	if !fwg && !dfs && !pdf {
-		report.WriteString("We didn't detect any common type core. Consider adding popular type cores such as fire-water-grass," +
+		report.WriteString("\nWe didn't detect any common type core. Consider adding popular type cores such as fire-water-grass," +
 			" dragon-fairy-steel, or psychic-dark-fighting.")
 	} else if fwg && !dfs && !pdf {
-		report.WriteString("Good job! Your team has a fire-water-grass core. This is one of the staple offensive " +
-			"and defensive cores in Pokemon. Consider adding Pokemon to hit other popular types like Dragon and Steel. \n")
+		report.WriteString("\nGood job! Your team has a fire-water-grass core. This is one of the staple offensive " +
+			"and defensive cores in Pokemon. Consider adding Pokemon to hit other popular types like Dragon and Steel. ")
 	} else if dfs && !fwg && !pdf {
-		report.WriteString("Good job! Your team has a dragon-fairy-steel core. This core can combat many elemental types" +
+		report.WriteString("\nGood job! Your team has a dragon-fairy-steel core. This core can combat many elemental types" +
 			" such as fire, water, grass, and electric. Consider adding Pokemon with types/moves that beat the fire, poison, " +
 			"and ground types that counter this core.")
 	} else if pdf && !fwg && !dfs {
-		report.WriteString("Good job! Your team has a psychic-dark-fighting core. Pokemon with these types have excellent " +
+		report.WriteString("\nGood job! Your team has a psychic-dark-fighting core. Pokemon with these types have excellent " +
 			"offensive synergy. Consider adding Pokemon with defensive tools to support your team, such as redirection, screens, " +
 			"intimidate, or more.")
 	} else if fwg && dfs && !pdf {
-		report.WriteString("Excellent! Your team has both a fire-water-grass core and a dragon-fairy-steel core. You have consistent " +
+		report.WriteString("\nExcellent! Your team has both a fire-water-grass core and a dragon-fairy-steel core. You have consistent " +
 			"defensive and offensive types that complement each other well.")
 	} else if fwg && pdf && !dfs {
-		report.WriteString("Excellent! Your team has both a fire-water-grass core and a psychic-dark-fighting core. You have consistent " +
+		report.WriteString("\nExcellent! Your team has both a fire-water-grass core and a psychic-dark-fighting core. You have consistent " +
 			"defensive and offensive types that complement each other well.")
 	} else if pdf && dfs && !fwg {
-		report.WriteString("Excellent! your team has both a dragon-fairy-steel core and a psychic-dark-fighting core. You have consistent" +
+		report.WriteString("\nExcellent! your team has both a dragon-fairy-steel core and a psychic-dark-fighting core. You have consistent" +
 			" resistances as well as good offensive coverage.")
 	} else {
-		report.WriteString("WOW! You've somehow created a team with a fire-water-grass core, a dragon-fairy-steel core, " +
+		report.WriteString("\nWOW! You've somehow created a team with a fire-water-grass core, a dragon-fairy-steel core, " +
 			"and a psychic-dark-fighting core. You have excellent offensive and defensive coverage typing across the board.")
 	}
 

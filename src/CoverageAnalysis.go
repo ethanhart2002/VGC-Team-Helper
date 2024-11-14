@@ -1,8 +1,5 @@
 package main
 
-// for each pokemon get moves
-
-//
 import (
 	"encoding/json"
 	"errors"
@@ -212,15 +209,15 @@ func CoverageReport(team []Pokemon) string {
 	difference := allTypes.SymmetricDifference(typesFound)
 
 	s := strings.Builder{}
-	s.WriteString("\n\nCoverage report \n -----------------------------\n")
+	//s.WriteString("\n\nCoverage report \n -----------------------------\n")
 
 	if difference.Cardinality() == 0 {
-		s.WriteString("Your team has coverage options to hit all 18 types!\n")
+		s.WriteString("\nYour team has coverage options to hit all 18 types!")
 		return s.String()
 	} else {
-		s.WriteString("Your team is missing attacking moves that can hit the following types for super-effective damage:\n\n")
+		s.WriteString("\nYour team is missing attacking moves that can hit the following types for super-effective damage:")
 		for missingType := range difference.Iter() {
-			s.WriteString(missingType + "\n")
+			s.WriteString("\n" + missingType)
 		}
 
 		s.WriteString("\nIf you find your team is struggling against Pokemon of these types, considering adding coverage moves to " +
