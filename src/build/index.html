@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pokepaste Team Analyzer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <h1>Pokepaste Team Analyzer</h1>
+  <form id="analyze-form">
+    <label for="teamLink">Enter Pokepaste Link:</label>
+    <input type="text" id="teamLink" placeholder="https://pokepast.es/your-link" required>
+    <button type="submit">Analyze</button>
+  </form>
+
+  <div id="loading" style="display: none;">Analyzing...</div>
+  <div id="error" style="color: red; display: none;"></div>
+
+  <div id="report" style="display: none;">
+    <h2>Analysis Report</h2>
+    <p><strong>Team:</strong> <span id="team"></span></p>
+    <p><strong>Core:</strong> <span id="core"></span></p>
+    <p><strong>Mode:</strong> <span id="mode"></span></p>
+    <p><strong>Coverage:</strong> <span id="coverage"></span></p>
+    <p><strong>Support:</strong> <span id="support"></span></p>
+  </div>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
