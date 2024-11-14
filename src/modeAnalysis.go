@@ -100,7 +100,7 @@ func ModeReport(team []Pokemon) string {
 	}
 
 	report := strings.Builder{}
-	report.WriteString("\n\nMode report \n -----------------------------")
+	//report.WriteString("\n\nMode report \n -----------------------------")
 
 	if TRFlag {
 		report.WriteString("\nTR Mode detected. Make sure you have a slow Pokemon that can take advantage of Trick Room. ")

@@ -10,7 +10,7 @@ Strategy:
 Let's check for common moves in VGC and report what we find.
 */
 
-func supportReport(team []Pokemon) string {
+func SupportReport(team []Pokemon) string {
 	fakeOutFlag := false
 	redirectionFlag := false
 	screensFlag := false
@@ -59,50 +59,50 @@ func supportReport(team []Pokemon) string {
 	}
 
 	report := strings.Builder{}
-	report.WriteString("\n\nSupport report \n -----------------------------\n")
+	//report.WriteString("\n\nSupport report \n -----------------------------\n")
 
 	if fakeOutFlag {
-		report.WriteString("Fake out detected \n")
+		report.WriteString("\nFake out detected.")
 	} else {
-		report.WriteString("There isn't any fake out on your team. Consider adding the move to a Pokemon that " +
-			"learns it and adding that Pokemon to your team, as it is a valuable tool in VGC that can prevent an opponent from attacking.\n")
+		report.WriteString("\nThere isn't any fake out on your team. Consider adding the move to a Pokemon that " +
+			"learns it and adding that Pokemon to your team, as it is a valuable tool in VGC that can prevent an opponent from attacking.")
 	}
 
 	if redirectionFlag {
-		report.WriteString("Redirection detected \n")
+		report.WriteString("\nRedirection detected.")
 	} else {
-		report.WriteString("Your team has no redirection moves. Consider adding Rage Powder or Follow Me to a Pokemon " +
+		report.WriteString("\nYour team has no redirection moves. Consider adding Rage Powder or Follow Me to a Pokemon " +
 			"that learns it and add it to your team. Redirection moves can protect frailer offensive Pokemon so they can " +
-			"survive longer.\n")
+			"survive longer.")
 	}
 
 	if screensFlag {
-		report.WriteString("Screens detected \n")
+		report.WriteString("\nScreens detected.")
 	} else {
-		report.WriteString("Your team has no screens to reduce damage. Screens aren't necessary for VGC teams, but if your " +
-			"team doesn't have a lot of defense, consider adding Light Screen, Reflect, or Aurora Veil.\n")
+		report.WriteString("\nYour team has no screens to reduce damage. Screens aren't necessary for VGC teams, but if your " +
+			"team doesn't have a lot of defense, consider adding Light Screen, Reflect, or Aurora Veil.")
 	}
 
 	if protectCount <= 2 {
-		report.WriteString("Your team doesn't have a lot of Pokemon that are carrying the move Protect. Protect is the most popular " +
-			"move in VGC, and is a staple to well-rounded teams. It may be worth adding Protect to more Pokemon.\n")
+		report.WriteString("\nYour team doesn't have a lot of Pokemon that are carrying the move Protect. Protect is the most popular " +
+			"move in VGC, and is a staple to well-rounded teams. It may be worth adding Protect to more Pokemon.")
 	}
 
 	if speedControlFlag {
-		report.WriteString("Speed Control detected \n")
+		report.WriteString("\nSpeed Control detected.")
 	} else {
-		report.WriteString("None of your Pokemon have a way to affect the speed control of your team. Speed control " +
+		report.WriteString("\nNone of your Pokemon have a way to affect the speed control of your team. Speed control " +
 			"is vital in VGC so that you can make your Pokemon move as early in the turn as possible. It would be good to add " +
 			"methods of speed control such as Tailwind or Trick Room, or spread moves that affect speed such as Icy Wind or " +
-			"Electroweb.\n")
+			"Electroweb.")
 	}
 
 	if statusFlag {
-		report.WriteString("Status moves detected. \n")
+		report.WriteString("\nStatus moves detected.")
 	} else {
-		report.WriteString("Your team doesn't have any popular status moves, such as Taunt, status-infliction moves, Helping " +
+		report.WriteString("\nYour team doesn't have any popular status moves, such as Taunt, status-infliction moves, Helping " +
 			"Hand, or stat raising/decreasing moves. Which moves fit your team may vary, but status moves can be disruptive towards " +
-			"your opponent's Pokemon.\n")
+			"your opponent's Pokemon.")
 	}
 
 	res := report.String()

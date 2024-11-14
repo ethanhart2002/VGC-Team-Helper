@@ -84,7 +84,7 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	// Support analysis
 	go func() {
 		defer wg.Done()
-		support = supportReport(team)
+		support = SupportReport(team)
 		//fmt.Print(support)
 	}()
 
@@ -108,11 +108,11 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	fs := http.FileServer(http.Dir("./"))
+	fs := http.FileServer(http.Dir("./build"))
 	http.Handle("/", fs)
 	// react
-	http.Handle("/analyze", enableCors(http.HandlerFunc(analyze)))
-	//http.HandleFunc("/analyze", analyze)
+	//http.Handle("/analyze", enableCors(http.HandlerFunc(analyze)))
+	http.HandleFunc("/analyze", analyze)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		return

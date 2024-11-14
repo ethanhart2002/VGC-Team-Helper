@@ -10,6 +10,11 @@ document.addEventListener("DOMContentLoaded", function () {
     const coverage = document.getElementById("coverage");
     const support = document.getElementById("support");
 
+    // Function to replace newlines with <br> tags
+    function handleNewlines(text) {
+        return text.replace(/\n/g, '<li>');
+    }
+
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
@@ -35,12 +40,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
             const data = await response.json();
 
-            // Populate report fields with the analysis data
-            team.textContent = data.team;
-            core.textContent = data.core;
-            mode.textContent = data.mode;
-            coverage.textContent = data.coverage;
-            support.textContent = data.support;
+            // team.textContent = data.team;
+           // team.innerHTML = handleNewlines(data.team);
+            core.innerHTML = handleNewlines(data.core);
+            mode.innerHTML = handleNewlines(data.mode);
+            coverage.innerHTML = handleNewlines(data.coverage);
+            support.innerHTML = handleNewlines(data.support);
 
             // Show the report and hide the loading indicator
             report.style.display = "block";

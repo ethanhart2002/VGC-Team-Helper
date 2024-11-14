@@ -126,7 +126,7 @@ func fetchPokemonData(pokemonName string) (*http.Response, error) {
 }
 
 // GetPokemonType fetches and returns the types of a given Pokémon
-func GetPokemonType(pokemonName string) ([]string, error) {
+func getPokemonType(pokemonName string) ([]string, error) {
 
 	// Send GET request through a special function
 	response, err := fetchPokemonData(pokemonName)
@@ -183,7 +183,7 @@ func parse(pokeInfo string, flag bool) Pokemon {
 	}
 
 	// Parse type(s)
-	types, err := GetPokemonType(strings.ToLower(p.Name))
+	types, err := getPokemonType(strings.ToLower(p.Name))
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -233,7 +233,7 @@ func RunParser(path string) ([]Pokemon, string) {
 	var team []Pokemon
 	var jsonTxt string
 
-	jsonTxt = jsonTxt + "\nYour team:\n" + "--------------------------------\n"
+	//jsonTxt = jsonTxt + "\nYour team:\n" + "--------------------------------\n"
 
 	// Get the Pokepaste
 	req, err := http.Get(path)
