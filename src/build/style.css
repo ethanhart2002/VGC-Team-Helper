@@ -1,40 +1,158 @@
+/* General Body Styles */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: #f7f7f7; /* Light gray background */
+    color: #333; /* Dark text color */
     margin: 0;
+    padding: 0;
 }
 
+#team img {
+    margin: 0 5px;
+    height: 64px; /* Adjust size if needed */
+}
+
+/* Main App Container */
 #app {
-    max-width: 600px;
-    width: 100%;
+    max-width: 900px;
+    margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* Header Style */
 h1 {
+    color: #E60012; /* Pokémon red */
     text-align: center;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect to make the text pop */
 }
 
+/* Form Styles */
 form {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    background-color: #FFCC00; /* Pokémon yellow */
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+}
+
+input {
+    width: 97%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 2px solid #009CDE; /* Pokémon blue border */
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+input:focus {
+    outline: none;
+    border-color: #E60012; /* Focus border with Pokémon red */
 }
 
 button {
+    width: 100%;
     padding: 10px;
-    font-size: 16px;
+    background-color: #009CDE; /* Pokémon blue */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1.1rem;
     cursor: pointer;
 }
 
-#report {
-    margin-top: 20px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
+button:hover {
+    background-color: #007bb5; /* Darker blue on hover */
 }
+
+/* Loading and Error Styles */
+#loading {
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px;
+    color: #009CDE; /* Pokémon blue */
+}
+
+#error {
+    color: #E60012; /* Pokémon red for errors */
+    font-size: 1.2rem;
+    margin-top: 10px;
+}
+
+/* Report Section Styles */
+#report {
+    background-color: #FFF;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#report h2 {
+    color: #E60012; /* Pokémon red */
+}
+
+#report p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+#report strong {
+    color: #009CDE; /* Pokémon blue */
+}
+
+/* Score and Result Styles */
+#score {
+    font-weight: bold;
+    color: #FFCC00; /* Pokémon yellow for the score */
+    font-size: 1.5rem;
+}
+
+
+
+/*body {*/
+/*    font-family: Arial, sans-serif;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    height: 100vh;*/
+/*    margin: 0;*/
+/*}*/
+
+/*#app {*/
+/*    max-width: 600px;*/
+/*    width: 100%;*/
+/*    padding: 20px;*/
+/*    border: 1px solid #ccc;*/
+/*    border-radius: 8px;*/
+/*    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);*/
+/*}*/
+
+/*h1 {*/
+/*    text-align: center;*/
+/*}*/
+
+/*form {*/
+/*    display: flex;*/
+/*    flex-direction: column;*/
+/*    gap: 10px;*/
+/*}*/
+
+/*button {*/
+/*    padding: 10px;*/
+/*    font-size: 16px;*/
+/*    cursor: pointer;*/
+/*}*/
+
+/*#report {*/
+/*    margin-top: 20px;*/
+/*    padding: 10px;*/
+/*    background-color: #f0f0f0;*/
+/*    border-radius: 5px;*/
+/*}*/
