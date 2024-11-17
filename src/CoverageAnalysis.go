@@ -155,7 +155,7 @@ Strategy:
 
 */
 
-func CoverageReport(team []Pokemon) (string, float64) {
+func CoverageReport(team []Pokemon) ([]string, float64) {
 
 	typesFound := mapset.NewSet[string]()
 	allTypes := mapset.NewSet[string](
@@ -213,14 +213,18 @@ func CoverageReport(team []Pokemon) (string, float64) {
 
 	var score float64
 
+	missingTypes := []string{}
+
 	if difference.Cardinality() == 0 {
 		s.WriteString("\nYour team has coverage options to hit all 18 types!")
 		score = 10
-		return s.String(), score
+		return missingTypes, score
+		//return s.String(), score
 	} else {
-		s.WriteString("\nYour team is missing attacking moves that can hit the following types for super-effective damage:")
+		//s.WriteString("\nYour team is missing attacking moves that can hit the following types for super-effective damage:")
 		for missingType := range difference.Iter() {
-			s.WriteString("\n" + missingType)
+			missingTypes = append(missingTypes, missingType)
+			//s.WriteString("\r" + missingType)
 		}
 
 		/**
@@ -229,10 +233,12 @@ func CoverageReport(team []Pokemon) (string, float64) {
 		*/
 		score = 10 - ((18 - float64(difference.Cardinality())) * (.55))
 
-		s.WriteString("\nIf you find your team is struggling against Pokemon of these types, considering adding coverage moves to " +
-			"hit these Pokemon with super effective damage.")
+		return missingTypes, score
 
-		return s.String(), score
+		//s.WriteString("\nIf you find your team is struggling against Pokemon of these types, considering adding coverage moves to " +
+		//	"hit these Pokemon with super effective damage.")
+
+		//return s.String(), score
 
 	}
 

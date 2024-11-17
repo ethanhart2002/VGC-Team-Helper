@@ -2,18 +2,20 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"net/http"
 	"strings"
 	"sync"
 )
 
 type Analysis struct {
-	Team     string  `json:"team"`
-	Core     string  `json:"core"`
-	Mode     string  `json:"mode"`
-	Coverage string  `json:"coverage"`
-	Support  string  `json:"support"`
-	Score    float64 `json:"score"`
+	//Team     string  `json:"team"`
+	Team     []Pokemon `json:"team"`
+	Core     string    `json:"core"`
+	Mode     string    `json:"mode"`
+	Coverage []string  `json:"coverage"`
+	Support  string    `json:"support"`
+	Score    float64   `json:"score"`
 }
 
 // CORS middleware function to add CORS headers
@@ -52,11 +54,12 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var core, mode, coverage, support string
+	var core, mode, support string
+	coverage := []string{}
 	var coreScore, modeScore, coverageScore, suppScore float64
 
 	team, teamToText := RunParser(link)
-	//fmt.Println(teamToText)
+	fmt.Println(teamToText)
 
 	// Setting up a wait group for goroutines
 	var wg sync.WaitGroup
@@ -96,7 +99,7 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	var totalScore float64 = coreScore*.3 + modeScore*.3 + coverageScore*.2 + suppScore*.2
 
 	res := Analysis{
-		Team:     teamToText,
+		Team:     team,
 		Core:     core,
 		Mode:     mode,
 		Coverage: coverage,

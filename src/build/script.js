@@ -1,82 +1,3 @@
-// document.addEventListener("DOMContentLoaded", function () {
-//     const form = document.getElementById("analyze-form");
-//     const teamLinkInput = document.getElementById("teamLink");
-//     const loading = document.getElementById("loading");
-//     const error = document.getElementById("error");
-//     const report = document.getElementById("report");
-//     const team = document.getElementById("team");
-//     const core = document.getElementById("core");
-//     const mode = document.getElementById("mode");
-//     const coverage = document.getElementById("coverage");
-//     const support = document.getElementById("support");
-//     const score = document.getElementById("score")
-//
-//     // Function to replace newlines with <br> tags
-//     function handleNewlines(text) {
-//         return text.replace(/\n/g, '<li>');
-//     }
-//
-//     form.addEventListener("submit", async function (event) {
-//         event.preventDefault();
-//
-//         const teamLink = teamLinkInput.value;
-//
-//         // Show loading indicator and hide error/report messages
-//         loading.style.display = "block";
-//         error.style.display = "none";
-//         report.style.display = "none";
-//
-//         try {
-//             const response = await fetch("http://localhost:8080/analyze", {
-//                 method: "POST",
-//                 headers: {
-//                     "Content-Type": "application/json"
-//                 },
-//                 body: JSON.stringify({ link: teamLink })
-//             });
-//
-//             if (!response.ok) {
-//                 throw new Error("Failed to analyze team. Please check the link.");
-//             }
-//
-//             const data = await response.json();
-//             let scoreString = "";
-//             if (typeof data.score === 'number' && !isNaN(data.score)) {
-//                 // Convert the score to a string and append "/10"
-//                 scoreString = data.score.toString() + "/10";
-//             } else {
-//                 // Handle the case where score is not a valid number
-//                 scoreString = "Score not available";
-//             }
-//             // console.log(score)
-//             // console.log(scoreString)
-//
-//
-//
-//
-//             // team.textContent = data.team;
-//            // team.innerHTML = handleNewlines(data.team);
-//             core.innerHTML = handleNewlines(data.core);
-//             mode.innerHTML = handleNewlines(data.mode);
-//             coverage.innerHTML = handleNewlines(data.coverage);
-//             support.innerHTML = handleNewlines(data.support);
-//
-//             //Todo
-//             score.textContent = scoreString;
-//
-//             // Show the report and hide the loading indicator
-//             report.style.display = "block";
-//         } catch (err) {
-//             error.textContent = err.message;
-//             error.style.display = "block";
-//         } finally {
-//             loading.style.display = "none";
-//         }
-//     });
-// });
-
-
-
 
 document.addEventListener("DOMContentLoaded", function () {
     const form = document.getElementById("analyze-form");
@@ -84,30 +5,112 @@ document.addEventListener("DOMContentLoaded", function () {
     const loading = document.getElementById("loading");
     const error = document.getElementById("error");
     const report = document.getElementById("report");
-    const team = document.getElementById("team");
     const core = document.getElementById("core");
     const mode = document.getElementById("mode");
     const coverage = document.getElementById("coverage");
     const support = document.getElementById("support");
     const score = document.getElementById("score");
 
+
+
     // Function to replace newlines with <br> tags
     function handleNewlines(text) {
         return text.replace(/\n/g, '<li>');
     }
 
-    // Function to fetch and display Pokémon sprites
-    function displayTeam(teamData) {
-        team.innerHTML = ''; // Clear any previous content
-        teamData.forEach(pokemon => {
-            const spriteUrl = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${pokemon.toLowerCase()}.png`;
+    function reportCoverage(coverageArray) {
+
+        if (coverageArray.length <= 0) {
+            coverage.innerHTML = `
+            <li> Your team has coverage options to hit all 18 types! </li>
+            `
+        } else {
+            let rep = `<li> Your team is missing attacking moves that can hit the following types for super-effective damage: </li>`;
+            for (let i = 0; i < coverageArray.length; i++) {
+                rep += `<br><b> ${coverageArray[i]} </b>`;
+            }
+            rep += `<br><br><li> If you find your team is struggling against Pokemon of these types, considering adding coverage moves to hit these Pokemon with super effective damage. </li>`;
+            coverage.innerHTML = rep;
+        }
+    }
+
+    function reportScore(scoreInput) {
+        score.innerHTML = ``;
+        score.className = "";
+        let s = ``
+        if (typeof scoreInput === 'number' && !isNaN(scoreInput)) {
+            if (scoreInput >= 8.0) {
+                score.classList.add("good");
+            } else if (scoreInput >= 7.0) {
+                score.classList.add("okay");
+            } else {
+                score.classList.add("needsWork");
+            }
+            s += `${scoreInput.toString()}/10`;
+        } else {
+            s += `Score not available`;
+        }
+        score.innerHTML = s;
+    }
+
+
+    function parseStructs(teamMembers) {
+        const container = document.getElementById("team-container");
+
+        // Clear previous content
+        container.innerHTML = '';
+
+        teamMembers.forEach(struct => {
+            const structElement = document.createElement("div");
+            structElement.classList.add("pokemon-container"); // Add class for styling
+
+            const pokemonName = struct.pokemon in nameDict ? nameDict[struct.pokemon] : struct.pokemon;
+            const spriteUrl = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${pokemonName.toLowerCase()}.png`;
+
             const img = document.createElement('img');
             img.src = spriteUrl;
-            img.alt = pokemon;
+            img.alt = struct.pokemon;
             img.onerror = () => { img.style.display = 'none'; }; // Hide image if not found
-            team.appendChild(img);
+            img.classList.add("pokemon-image")
+
+            const textContainer = document.createElement('div');
+            textContainer.classList.add("pokemon-textbox"); // Add class for styling
+            textContainer.innerHTML = `
+            <p>Name: ${struct.pokemon}</p>
+            <p>Type(s): ${struct.type}</p>
+            <p>Item: ${struct.item}</p>
+            <p>Ability: ${struct.ability}</p>
+            <p>Tera Type: ${struct.tera_type}</p>
+            <p>Moves: ${struct.moves}</p>
+        `;
+
+            structElement.appendChild(img);
+            structElement.appendChild(textContainer);
+            container.appendChild(structElement);
         });
     }
+
+
+    const nameDict = {
+        "Indeedee-F": "Indeedee-female",
+        "Basculegion-F": "Basculegion-female",
+        "Arcanine-Hisui": "Arcanine-Hisuian",
+        "Growlithe-Hisui": "Growlithe-Hisuian",
+        "Voltorb-Hisui": "Voltorb-Hisuian",
+        "Electrode-Hisui": "Electrode-Hisuian",
+        "Typhlosion-Hisui": "Typhlosion-Hisuian",
+        "Qwilfish-Hisui": "Qwilfish-Hisuian",
+        "Sneasel-Hisui": "Sneasel-Hisuian",
+        "Lilligant-Hisui": "Lilligant-Hisuian",
+        "Zorua-Hisui": "Zorua-Hisuian",
+        "Zoroark-Hisui": "Zoroark-Hisuian",
+        "Samurott-Hisui": "Samurott-Hisuian",
+        "Braviary-Hisui": "Braviary-Hisuian",
+        "Sliggoo-Hisui": "Sliggoo-Hisuian",
+        "Goodra-Hisui": "Goodra-Hisuian",
+        "Avalugg-Hisui": "Avalugg-Hisuian",
+        //TODO Add Galarian, Alolan, and Paldean conversions
+    };
 
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
@@ -115,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const teamLink = teamLinkInput.value;
 
         // Show loading indicator and hide error/report messages
-        loading.style.display = "block";
+        document.getElementById("loading").style.display = "block";
         error.style.display = "none";
         report.style.display = "none";
 
@@ -133,28 +136,15 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             const data = await response.json();
-            let scoreString = "";
 
-            if (typeof data.score === 'number' && !isNaN(data.score)) {
-                scoreString = data.score.toString() + "/10";
-            } else {
-                scoreString = "Score not available";
-            }
 
-            // Display Pokémon team sprites
-            if (Array.isArray(data.team)) {
-                displayTeam(data.team);
-            } else {
-                team.textContent = "Invalid team data.";
-            }
-
+            parseStructs(data.team);
             core.innerHTML = handleNewlines(data.core);
             mode.innerHTML = handleNewlines(data.mode);
-            coverage.innerHTML = handleNewlines(data.coverage);
+            reportCoverage(data.coverage)
             support.innerHTML = handleNewlines(data.support);
+            reportScore(data.score);
 
-            // Display the score
-            score.textContent = scoreString;
 
             // Show the report and hide the loading indicator
             report.style.display = "block";
@@ -162,7 +152,7 @@ document.addEventListener("DOMContentLoaded", function () {
             error.textContent = err.message;
             error.style.display = "block";
         } finally {
-            loading.style.display = "none";
+            document.getElementById("loading").style.display = "none";
         }
     });
 });

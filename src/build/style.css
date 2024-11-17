@@ -7,10 +7,89 @@ body {
     padding: 0;
 }
 
-#team img {
-    margin: 0 5px;
-    height: 64px; /* Adjust size if needed */
+/* Loading Wheel Styling */
+.loading-wheel {
+    border: 8px solid #f3f3f3; /* Light gray */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin: 20px auto; /* Center it horizontally */
 }
+
+/* Spin Animation */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.pokemon-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    position: relative;
+}
+
+#team-container {
+    display: flex; /* Align children horizontally */
+    flex-wrap: wrap; /* Wrap to the next line if necessary */
+    gap: 1rem; /* Add spacing between items */
+    justify-content: center; /* Align items to the left */
+    margin-bottom: 20px;
+
+}
+
+/*.pokemon-container {*/
+/*    display: flex; !* Align image and text box horizontally *!*/
+/*    flex-direction: column; !* Stack text below the image *!*/
+/*    align-items: center; !* Center-align image and text *!*/
+/*    margin: 0.5rem;*/
+/*    position: relative; !* Required for hover effects *!*/
+/*}*/
+
+
+/* Image styling */
+.pokemon-image {
+    width: 120px; /* Adjust size as needed */
+    height: auto;
+    cursor: pointer;
+}
+
+/* Text box styling */
+.pokemon-textbox {
+    display: none; /* Initially hidden */
+    position: absolute;
+    bottom: 110%; /* Position above the image */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+    color: white;
+    padding: 0.5rem;
+    border-radius: 5px;
+    text-align: left;
+    width: 150px; /* Adjust width as needed */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    z-index: 10;
+}
+
+/* Show text box on hover */
+.pokemon-container:hover .pokemon-textbox {
+    display: block;
+}
+
+/* Optional: Arrow for text box */
+.pokemon-textbox::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 5px;
+    border-style: solid;
+    border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
+}
+
 
 /* Main App Container */
 #app {
@@ -96,6 +175,7 @@ button:hover {
 
 #report h2 {
     color: #E60012; /* Pokémon red */
+    margin-bottom: 20px;
 }
 
 #report p {
@@ -105,54 +185,30 @@ button:hover {
 
 #report strong {
     color: #009CDE; /* Pokémon blue */
+    font-size: 1.2rem;
 }
 
-/* Score and Result Styles */
-#score {
+#report b {
+    color: black;
+}
+
+.good {
+    font-weight: bold;
+    color: green; /* Pokémon yellow for the score */
+    font-size: 1.5rem;
+}
+
+.okay {
     font-weight: bold;
     color: #FFCC00; /* Pokémon yellow for the score */
     font-size: 1.5rem;
 }
 
+.needsWork {
+    font-weight: bold;
+    color: #E60012; /* Pokémon yellow for the score */
+    font-size: 1.5rem;
+}
 
 
-/*body {*/
-/*    font-family: Arial, sans-serif;*/
-/*    display: flex;*/
-/*    justify-content: center;*/
-/*    align-items: center;*/
-/*    height: 100vh;*/
-/*    margin: 0;*/
-/*}*/
 
-/*#app {*/
-/*    max-width: 600px;*/
-/*    width: 100%;*/
-/*    padding: 20px;*/
-/*    border: 1px solid #ccc;*/
-/*    border-radius: 8px;*/
-/*    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);*/
-/*}*/
-
-/*h1 {*/
-/*    text-align: center;*/
-/*}*/
-
-/*form {*/
-/*    display: flex;*/
-/*    flex-direction: column;*/
-/*    gap: 10px;*/
-/*}*/
-
-/*button {*/
-/*    padding: 10px;*/
-/*    font-size: 16px;*/
-/*    cursor: pointer;*/
-/*}*/
-
-/*#report {*/
-/*    margin-top: 20px;*/
-/*    padding: 10px;*/
-/*    background-color: #f0f0f0;*/
-/*    border-radius: 5px;*/
-/*}*/
