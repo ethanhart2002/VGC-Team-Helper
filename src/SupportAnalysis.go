@@ -10,37 +10,46 @@ Strategy:
 Let's check for common moves in VGC and report what we find.
 */
 
-func SupportReport(team []Pokemon) string {
+func SupportReport(team []Pokemon) (string, float64) {
 	fakeOutFlag := false
 	redirectionFlag := false
 	screensFlag := false
 	protectCount := 0
 	speedControlFlag := false
 	statusFlag := false
+
+	moveCount := 0
 	for _, pokemon := range team {
 		for _, move := range pokemon.Moves {
 			if strings.Contains(move, "Fake Out") {
 				fakeOutFlag = true
+				moveCount++
 			}
 			if strings.Contains(move, "Rage Powder") || strings.Contains(move, "Follow Me") {
 				redirectionFlag = true
+				moveCount++
 			}
 			if strings.Contains(move, "Light Screen") || strings.Contains(move, "Reflect") ||
 				strings.Contains(move, "Aurora Veil") {
 				screensFlag = true
+				moveCount++
 			}
 			if strings.Contains(move, "Protect") || strings.Contains(move, "Spiky Shield") ||
 				strings.Contains(move, "Burning Bulwark") || strings.Contains(move, "Baneful Bunker") ||
 				strings.Contains(move, "Detect") || strings.Contains(move, "King's Shield") ||
 				strings.Contains(move, "Obstruct") || strings.Contains(move, "Silk Trap") {
 				protectCount++
+				moveCount++
 			}
 			if strings.Contains(move, "Tailwind") || strings.Contains(move, "Trick Room") ||
 				strings.Contains(move, "Icy Wind") || strings.Contains(move, "Electroweb") ||
 				strings.Contains(move, "Glaciate") || strings.Contains(move, "Sticky Web") ||
 				strings.Contains(move, "Thunder Wave") {
 				speedControlFlag = true
+				moveCount++
 			}
+
+			//Todo
 			if strings.Contains(move, "Taunt") || strings.Contains(move, "Helping Hand") ||
 				strings.Contains(move, "Encore") || strings.Contains(move, "Disable") ||
 				strings.Contains(move, "Spore") || strings.Contains(move, "Will-O-Wisp") ||
@@ -50,9 +59,12 @@ func SupportReport(team []Pokemon) string {
 				strings.Contains(move, "Coaching") || strings.Contains(move, "Charm") ||
 				strings.Contains(move, "Eerie Impulse") || strings.Contains(move, "Wide Guard") ||
 				strings.Contains(move, "Life Dew") || strings.Contains(move, "Yawn") ||
-				strings.Contains(move, "Quick Guard") {
-
+				strings.Contains(move, "Quick Guard") || strings.Contains(move, "Grassy Terrain") ||
+				strings.Contains(move, "Misty Terrain") || strings.Contains(move, "Psychic Terrain") ||
+				strings.Contains(move, "Electric Terrain") || strings.Contains(move, "Stealth Rock") ||
+				strings.Contains(move, "Spikes") {
 				statusFlag = true
+				moveCount++
 
 			}
 		}
@@ -105,6 +117,25 @@ func SupportReport(team []Pokemon) string {
 			"your opponent's Pokemon.")
 	}
 
+	var score float64
+
+	/**
+	Grading strategy: Based off of statistics of top tournament teams, 8 support moves (including protects) will be the benchmark.
+	Lower amounts of supporting moves will be decremented accordingly.
+	*/
+
+	if moveCount >= 8 {
+		score = 10.0
+	} else if moveCount == 7 {
+		score = 9.0
+	} else if moveCount == 6 {
+		score = 8.0
+	} else if moveCount == 5 {
+		score = 7.0
+	} else {
+		score = 4.5
+	}
+
 	res := report.String()
-	return res
+	return res, score
 }

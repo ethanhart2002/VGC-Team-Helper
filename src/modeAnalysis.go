@@ -10,7 +10,7 @@ Strategy:
 Look for elements of a variety of modes in VGC and report what we find.
 */
 
-func ModeReport(team []Pokemon) string {
+func ModeReport(team []Pokemon) (string, float64) {
 
 	TRFlag := false
 	TailwindFlag := false
@@ -29,34 +29,44 @@ func ModeReport(team []Pokemon) string {
 	sandFlag := false
 	snowFlag := false
 
+	var modeCount int
+
 	// Check for Trick Room, Tailwind, Psyspam, Perish Song, Weather, and Balance
 	for _, pokemon := range team {
 		if strings.Contains(pokemon.Ability, "Sand Stream") {
 			sandFlag = true
+			modeCount++
 		}
 		if strings.Contains(pokemon.Ability, "Drizzle") {
 			rainFlag = true
+			modeCount++
 		}
 		if strings.Contains(pokemon.Ability, "Drought") {
 			sunFlag = true
+			modeCount++
 		}
 		if strings.Contains(pokemon.Ability, "Snow Warning") {
 			snowFlag = true
+			modeCount++
 		}
 		for _, move := range pokemon.Moves {
 			if strings.Contains(move, "Trick Room") {
 				TRFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Tailwind") {
 				TailwindFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Perish Song") {
 				PerishFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Expanding Force") {
 				for _, poke := range team {
 					if strings.Contains(poke.Ability, "Psychic Surge") {
 						PsyFlag = true
+						modeCount++
 					}
 				}
 			}
@@ -64,25 +74,31 @@ func ModeReport(team []Pokemon) string {
 			// Balance
 			if strings.Contains(move, "Follow Me") || strings.Contains(move, "Rage Powder") {
 				RedirectionFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Fake Out") {
 				FOFlag = true
 				FOCount = FOCount + 1
+				modeCount++
 			}
 
 			// Weather
 
 			if strings.Contains(move, "Sunny Day") {
 				sunFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Rain Dance") {
 				rainFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Sandstorm") {
 				sandFlag = true
+				modeCount++
 			}
 			if strings.Contains(move, "Snowscape") {
 				snowFlag = true
+				modeCount++
 			}
 
 			// Setup
@@ -95,6 +111,7 @@ func ModeReport(team []Pokemon) string {
 				strings.Contains(move, "Geomancy") || strings.Contains(move, "Shift Gear") || strings.Contains(move, "Minimize") ||
 				strings.Contains(move, "Baton Pass") || strings.Contains(move, "Shed Tail") { //TODO add more
 				SetupFlag = true
+				modeCount++
 			}
 		}
 	}
@@ -175,7 +192,22 @@ func ModeReport(team []Pokemon) string {
 			"Slush Rush and Snow Cloak also benefit from the snow.")
 	}
 
+	var score float64
+
+	/**
+	Strategy for grading modes: >= 3 modes scores 10/10, 2 modes is a 8/10, 1 mode is a 6/10, no mode is a 0/10. Having a plan is key!
+	*/
+	if modeCount >= 3 {
+		score = 10
+	} else if modeCount == 2 {
+		score = 8
+	} else if modeCount == 1 {
+		score = 6
+	} else {
+		score = 0
+	}
+
 	res := report.String()
 
-	return res
+	return res, score
 }

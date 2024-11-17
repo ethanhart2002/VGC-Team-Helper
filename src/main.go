@@ -8,11 +8,12 @@ import (
 )
 
 type Analysis struct {
-	Team     string `json:"team"`
-	Core     string `json:"core"`
-	Mode     string `json:"mode"`
-	Coverage string `json:"coverage"`
-	Support  string `json:"support"`
+	Team     string  `json:"team"`
+	Core     string  `json:"core"`
+	Mode     string  `json:"mode"`
+	Coverage string  `json:"coverage"`
+	Support  string  `json:"support"`
+	Score    float64 `json:"score"`
 }
 
 // CORS middleware function to add CORS headers
@@ -52,6 +53,7 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var core, mode, coverage, support string
+	var coreScore, modeScore, coverageScore, suppScore float64
 
 	team, teamToText := RunParser(link)
 	//fmt.Println(teamToText)
@@ -63,33 +65,35 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	// Core analysis
 	go func() {
 		defer wg.Done()
-		core = CoreReport(team)
+		core, coreScore = CoreReport(team)
 		//fmt.Print(core)
 	}()
 
 	// Mode analysis
 	go func() {
 		defer wg.Done()
-		mode = ModeReport(team)
+		mode, modeScore = ModeReport(team)
 		//fmt.Print(mode)
 	}()
 
 	// Coverage analysis
 	go func() {
 		defer wg.Done()
-		coverage = CoverageReport(team)
+		coverage, coverageScore = CoverageReport(team)
 		//fmt.Print(coverage)
 	}()
 
 	// Support analysis
 	go func() {
 		defer wg.Done()
-		support = SupportReport(team)
+		support, suppScore = SupportReport(team)
 		//fmt.Print(support)
 	}()
 
 	// Wait for all goroutines to finish
 	wg.Wait()
+
+	var totalScore float64 = coreScore*.3 + modeScore*.3 + coverageScore*.2 + suppScore*.2
 
 	res := Analysis{
 		Team:     teamToText,
@@ -97,6 +101,7 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 		Mode:     mode,
 		Coverage: coverage,
 		Support:  support,
+		Score:    totalScore,
 	}
 
 	w.Header().Set("Content-Type", "application/json")
