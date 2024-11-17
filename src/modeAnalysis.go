@@ -117,10 +117,9 @@ func ModeReport(team []Pokemon) (string, float64) {
 	}
 
 	report := strings.Builder{}
-	//report.WriteString("\n\nMode report \n -----------------------------")
 
 	if TRFlag {
-		report.WriteString("\nTR Mode detected. Make sure you have a slow Pokemon that can take advantage of Trick Room. ")
+		report.WriteString("\nTrick Room mode detected. Make sure you have a slow Pokemon that can take advantage of Trick Room. ")
 	} else {
 		report.WriteString("\nWe didnt detect a Trick Room mode. If your team is utilizing a lot of slow Pokemon, consider adding the move Trick Room to your team " +
 			"so that your slower Pokemon can move first.")
@@ -195,7 +194,7 @@ func ModeReport(team []Pokemon) (string, float64) {
 	var score float64
 
 	/**
-	Strategy for grading modes: >= 3 modes scores 10/10, 2 modes is a 8/10, 1 mode is a 6/10, no mode is a 0/10. Having a plan is key!
+	Strategy for grading modes: >= 3 modes scores 10/10, 2 modes is an 8/10, 1 mode is a 6/10, no mode is a 0/10. Having a plan is key!
 	*/
 	if modeCount >= 3 {
 		score = 10

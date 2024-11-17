@@ -20,7 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     function reportCoverage(coverageArray) {
 
-        if (coverageArray.length <= 0) {
+        if (coverageArray == null) {
             coverage.innerHTML = `
             <li> Your team has coverage options to hit all 18 types! </li>
             `
@@ -91,7 +91,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+
+    // There is a discrepancy between how Pokepaste names certain Pokemon vs PokemonDB, so
+    // we will need to convert them sometimes.
     const nameDict = {
+        "Pyroar-M": "Pyroar-Male",
+        "Pyroar-F": "Pyroar-Female",
         "Indeedee-F": "Indeedee-female",
         "Basculegion-F": "Basculegion-female",
         "Arcanine-Hisui": "Arcanine-Hisuian",
@@ -109,7 +114,48 @@ document.addEventListener("DOMContentLoaded", function () {
         "Sliggoo-Hisui": "Sliggoo-Hisuian",
         "Goodra-Hisui": "Goodra-Hisuian",
         "Avalugg-Hisui": "Avalugg-Hisuian",
-        //TODO Add Galarian, Alolan, and Paldean conversions
+        "Wooper-Paldea": "Wooper-Paldean",
+        "Tauros-Paldea-Aqua": "Tauros-Paldean-Aqua",
+        "Tauros-Paldea-Blaze": "Tauros-Paldean-Blaze",
+        "Tauros-Paldea-Combat": "Tauros-Paldean-Combat",
+        "Rattata-Alola": "Rattata-Alolan",
+        "Raticate-Alola": "Raticate-Alolan",
+        "Raichu-Alola": "Raichu-Alolan",
+        "Sandshrew-Alola": "Sandshrew-Alolan",
+        "Sandslash-Alola": "Sandslash-Alolan",
+        "Vulpix-Alola": "Vulpix-Alolan",
+        "Ninetales-Alola": "Ninetales-Alolan",
+        "Diglett-Alola": "Diglett-Alolan",
+        "Dugtrio-Alola": "Dugtrio-Alolan",
+        "Meowth-Alola": "Meowth-Alolan",
+        "Persian-Alola": "Persian-Alolan",
+        "Geodude-Alola": "Geodude-Alolan",
+        "Graveler-Alola": "Graveler-Alolan",
+        "Golem-Alola": "Golem-Alolan",
+        "Grimer-Alola": "Grimer-Alolan",
+        "Muk-Alola": "Muk-Alolan",
+        "Exeggutor-Alola": "Exeggutor-Alolan",
+        "Marowak-Alola": "Marowak-Alolan",
+        "Meowth-Galar": "Meowth-Galarian",
+        "Ponyta-Galar": "Ponyta-Galarian",
+        "Rapidash-Galar": "Rapidash-Galarian",
+        "Slowpoke-Galar": "Slowpoke-Galarian",
+        "Slowbro-Galar": "Slowbro-Galarian",
+        "Weezing-Galar": "Weezing-Galarian",
+        "Farfetch'd-Galar": "Farfetch'd-Galarian",
+        "Mr.Mime-Galar": "Mr.Mime-Galarian",
+        "Articuno-Galar": "Articuno-Galarian",
+        "Zapdos-Galar": "Zapdos-Galarian",
+        "Moltres-Galar": "Moltres-Galarian",
+        "Slowking-Galar": "Slowking-Galarian",
+        "Corsola-Galar": "Corsola-Galarian",
+        "Zigzagoon-Galar": "Zigzagoon-Galarian",
+        "Linoone-Galar": "Linoone-Galarian",
+        "Darumaka-Galar": "Darumaka-Galarian",
+        "Darmanitan-Galar": "Darmanitan-Galarian",
+        "Yanmask-Galar": "Yanmask-Galarian",
+        "Stunfisk-Galar": "Stunfisk-Galarian",
+        //TODO Add more naming convention fixes when they come up
     };
 
     form.addEventListener("submit", async function (event) {

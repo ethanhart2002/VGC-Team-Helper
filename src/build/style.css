@@ -1,3 +1,5 @@
+
+
 /* General Body Styles */
 body {
     font-family: Arial, sans-serif;
@@ -24,12 +26,40 @@ body {
     100% { transform: rotate(360deg); }
 }
 
-.pokemon-container {
-    display: flex;
+.logo {
+    display: flex; /* Flex layout */
+    gap: 0.4rem; /* Space between words */
     align-items: center;
-    margin-bottom: 1.2rem;
-    position: relative;
+    justify-content: center; /* Center the text horizontally */
+    font-weight: bold;
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin: 20px 0;
+    text-align: center; /* Ensure proper text alignment */
 }
+
+.logo .red {
+    color: #FF1C1C; /* Pokémon red */
+}
+
+.logo .blue {
+    color: #0066FF; /* Pokémon blue */
+}
+
+.logo .yellow {
+    color: #FFCC00; /* Pokémon yellow */
+}
+
+/* Optional animation for a playful effect */
+.logo span {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.logo span:hover {
+    transform: scale(1.1);
+    text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
 
 #team-container {
     display: flex; /* Align children horizontally */
@@ -40,18 +70,16 @@ body {
 
 }
 
-/*.pokemon-container {*/
-/*    display: flex; !* Align image and text box horizontally *!*/
-/*    flex-direction: column; !* Stack text below the image *!*/
-/*    align-items: center; !* Center-align image and text *!*/
-/*    margin: 0.5rem;*/
-/*    position: relative; !* Required for hover effects *!*/
-/*}*/
+.pokemon-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.2rem;
+    position: relative;
+}
 
 
-/* Image styling */
 .pokemon-image {
-    width: 120px; /* Adjust size as needed */
+    width: 120px;
     height: auto;
     cursor: pointer;
 }
@@ -96,11 +124,13 @@ body {
     max-width: 900px;
     margin: 0 auto;
     padding: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Header Style */
 h1 {
-    color: #E60012; /* Pokémon red */
+    color: #FFCC00; /* Pokémon red */
     text-align: center;
     font-size: 3rem;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Shadow effect to make the text pop */
@@ -175,7 +205,10 @@ button:hover {
 
 #report h2 {
     color: #E60012; /* Pokémon red */
-    margin-bottom: 20px;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 2.5rem;
+    text-decoration: underline;
 }
 
 #report p {
