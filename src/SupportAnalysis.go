@@ -127,13 +127,17 @@ func SupportReport(team []Pokemon) (string, float64) {
 	if moveCount >= 8 {
 		score = 10.0
 	} else if moveCount == 7 {
-		score = 9.0
+		score = 8.5
 	} else if moveCount == 6 {
-		score = 8.0
-	} else if moveCount == 5 {
 		score = 7.0
+	} else if moveCount == 5 {
+		score = 6.0
+	} else if moveCount == 4 {
+		score = 5.0
+	} else if moveCount == 3 {
+		score = 3.0
 	} else {
-		score = 4.5
+		score = 1.0
 	}
 
 	res := report.String()

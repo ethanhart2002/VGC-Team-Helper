@@ -28,7 +28,6 @@ func CoreReport(team []Pokemon) (string, float64) {
 		}
 	}
 	report := strings.Builder{}
-	//report.WriteString("\n\nCore report \n -----------------------------\n")
 	fwg := false
 	dfs := false
 	pdf := false
@@ -38,20 +37,16 @@ func CoreReport(team []Pokemon) (string, float64) {
 	partPdf := false
 
 	if fwgSet.Cardinality() == 3 {
-		report.WriteString("\nFire-Water-Grass core detected. ")
 		fwg = true
 	} else if fwgSet.Cardinality() == 2 {
-		report.WriteString("\nTwo-thirds of a Fire-Water-Grass core detected.")
 		partFwg = true
 	}
 	if fantasySet.Cardinality() == 3 {
-		report.WriteString("\nDragon-Fairy-Steel core detected. ")
 		dfs = true
 	} else if fantasySet.Cardinality() == 2 {
 		partDFS = true
 	}
 	if PDFSet.Cardinality() == 3 {
-		report.WriteString("\nPsychic-Dark-Fighting core detected. ")
 		pdf = true
 	} else if PDFSet.Cardinality() == 2 {
 		partPdf = true
@@ -104,7 +99,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 1.0
 		} else {
-			score = 6.7
+			score = 7.5
 		}
 
 		//partial dfs
@@ -114,7 +109,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 1.0
 		} else {
-			score = 6.5
+			score = 7.5
 		}
 		//partial pdf
 	} else if !partFwg && !partDFS && partPdf {
@@ -123,7 +118,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 1.0
 		} else {
-			score = 6.0
+			score = 7.0
 		}
 
 		//partial fwg and dfs
@@ -133,7 +128,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 2.0
 		} else {
-			score = 7.5
+			score = 8.0
 		}
 
 		//partial dfs and pdf
@@ -143,7 +138,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 2.0
 		} else {
-			score = 7.5
+			score = 8.0
 		}
 
 		//partial fwg and pdf
@@ -153,7 +148,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 2.0
 		} else {
-			score = 7.5
+			score = 8.0
 		}
 
 		//all 3 partials
@@ -163,13 +158,13 @@ func CoreReport(team []Pokemon) (string, float64) {
 		if score != 0 {
 			score = score + 2.0
 		} else {
-			score = 8.0
+			score = 9.0
 		}
 	} else {
 		report.WriteString("\nWe didn't detect any common type core. Consider adding popular type cores such as fire-water-grass," +
 			" dragon-fairy-steel, or psychic-dark-fighting.")
 		if score == 0 {
-			score = 4.0
+			score = 1.0
 		}
 	}
 

@@ -3,29 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pokepaste Team Analyzer</title>
+  <style> body {
+    background-image: url('./Background.jpeg');
+    background-size: cover;
+    background-attachment: fixed;
+  }</style>
+  <title>Pokepaste Team Helper</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <div id="app">
-  <h1>Pokepaste Team Analyzer</h1>
+  <div class="logo">
+    <span class="red">Pokepaste</span>
+    <span class="blue">Team</span>
+    <span class="yellow">Helper</span>
+  </div>
   <form id="analyze-form">
     <label for="teamLink">Enter Pokepaste Link:</label>
     <input type="text" id="teamLink" placeholder="https://pokepast.es/your-link" required>
     <button type="submit">Analyze</button>
   </form>
 
-  <div id="loading" style="display: none;">Analyzing...</div>
+  <div id="loading" class="loading-wheel" style="display: none;"></div>
   <div id="error" style="color: red; display: none;"></div>
 
   <div id="report" style="display: none;">
     <h2>Analysis</h2>
-    <p><strong>Team Report:</strong> <span id="team"></span></p>
-    <p><strong>Core Report:</strong> <span id="core"></span></p>
-    <p><strong>Mode Report:</strong> <span id="mode"></span></p>
-    <p><strong>Coverage Report:</strong> <span id="coverage"></span></p>
-    <p><strong>Support Report:</strong> <span id="support"></span></p>
-    <p><strong>Final Score:</strong> <span id="score"></span></p>
+    <div id="team-container"> </div>
+    <p><strong>Core Report</strong></p>
+      <p><span id="core"></span></p>
+    <p><strong>Mode Report</strong></p>
+      <p><span id="mode"></span></p>
+    <p><strong>Coverage Report</strong></p>
+      <p><span id="coverage"></span></p>
+    <p><strong>Support Report</strong></p>
+      <p><span id="support"></span></p>
+    <p><strong>Final Score</strong> <span id="score"></span></p>
   </div>
 </div>
 <script src="script.js"></script>
