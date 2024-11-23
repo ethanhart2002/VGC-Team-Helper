@@ -173,7 +173,7 @@ document.addEventListener("DOMContentLoaded", function () {
         //local debug
         //hostPath = "https://localhost/analyze";
 
-        hostPath = "https://vgcteamhelper-kv9mz.ondigitalocean.app/";
+        hostPath = "https://monkfish-app-8weyt.ondigitalocean.app/";
 
         try {
             const response = await fetch(hostPath, {
