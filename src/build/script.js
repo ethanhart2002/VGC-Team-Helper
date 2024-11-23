@@ -173,8 +173,6 @@ document.addEventListener("DOMContentLoaded", function () {
         //local debug
         //hostPath = "https://localhost/analyze";
 
-        hostPath = "https://monkfish-app-8weyt.ondigitalocean.app/";
-
         try {
             const response = await fetch(hostPath, {
                 method: "POST",
