@@ -133,8 +133,11 @@ func main() {
 	fs := http.FileServer(http.Dir("./build"))
 
 	http.Handle("/", enableCors(fs))
-	http.HandleFunc("/analyze", analyze)
 
+	//local debug:
+	// http.Handle("/", fs)
+
+	http.HandleFunc("/analyze", analyze)
 	err := http.ListenAndServe(":8080", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)
