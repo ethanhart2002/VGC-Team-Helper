@@ -169,7 +169,7 @@ document.addEventListener("DOMContentLoaded", function () {
         report.style.display = "none";
 
         try {
-            const response = await fetch("https://api.vgc-team-helper-wfmlb.ondigitalocean.app/analyze", {
+            const response = await fetch("/analyze", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
