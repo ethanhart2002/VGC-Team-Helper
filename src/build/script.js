@@ -171,7 +171,9 @@ document.addEventListener("DOMContentLoaded", function () {
         let hostPath = "https://vgcteamhelper.com/analyze";
 
         //local debug
-        //hostPath = "http://localhost:8080/analyze"
+        //hostPath = "https://localhost/analyze";
+
+        hostPath = "https://vgcteamhelper-kv9mz.ondigitalocean.app/";
 
         try {
             const response = await fetch(hostPath, {
