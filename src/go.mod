@@ -1,6 +1,6 @@
 module Pokepast
 
-go 1.23.3
+go 1.23
 
 require (
 	github.com/PuerkitoBio/goquery v1.10.0
