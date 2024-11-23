@@ -23,7 +23,7 @@ type Analysis struct {
 // CORS middleware function to add CORS headers
 func enableCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "https://vgc-team-helper-wfmlb.ondigitalocean.app/") // Adjust for your frontend's origin
+		w.Header().Set("Access-Control-Allow-Origin", "https://vgc-team-helper-wfmlb.ondigitalocean.app:8080") // Adjust for your frontend's origin
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		if r.Method == "OPTIONS" {
