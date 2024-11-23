@@ -135,9 +135,13 @@ func main() {
 	http.Handle("/", enableCors(fs))
 
 	//local debug:
-	// http.Handle("/", fs)
+	//http.Handle("/", fs)
 
 	http.HandleFunc("/analyze", analyze)
+
+	//local debug
+	//err := http.ListenAndServe(":8080", nil)
+
 	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)

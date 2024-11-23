@@ -168,8 +168,13 @@ document.addEventListener("DOMContentLoaded", function () {
         error.style.display = "none";
         report.style.display = "none";
 
+        let hostPath = "https://vgcteamhelper.com/analyze";
+
+        //local debug
+        //hostPath = "http://localhost:8080/analyze"
+
         try {
-            const response = await fetch("https://vgc-team-helper-wfmlb.ondigitalocean.app/analyze", {
+            const response = await fetch(hostPath, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
