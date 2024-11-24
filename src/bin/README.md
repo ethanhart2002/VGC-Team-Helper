@@ -1,1 +1,0 @@
-Directory where Pokepaste runs out of in production.

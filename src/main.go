@@ -134,17 +134,13 @@ func main() {
 
 	http.Handle("/", enableCors(fs))
 
-	//local debug:
-	//http.Handle("/", fs)
-
 	http.HandleFunc("/analyze", analyze)
 
-	//local debug
-	//err := http.ListenAndServe(":8080", nil)
-
+	//For running locally, replace the first parameter below with port 8080, and go to script.js to uncomment the local debug line that reads 'hostPath = "http://localhost:8080/analyze";'
 	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)
 		return
 	}
+
 }
