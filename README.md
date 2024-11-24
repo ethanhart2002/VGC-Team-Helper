@@ -1,4 +1,5 @@
 # VGC-Team-Helper
+Please consider leaving a Watch or a Star if you're interested in following this project!
 
 ## License
 See the License [here](./LICENSE).
