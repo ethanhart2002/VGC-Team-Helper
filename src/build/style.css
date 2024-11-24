@@ -62,7 +62,7 @@
         right: 10px; /* Consistent alignment */
         font-size: 12px; /* Ensure readability on higher-res displays */
         padding: 6px 12px; /* Balanced padding */
-        transform: scale(0.5); /* Scale the button to 80% of its original size */
+        transform: scale(0.4); /* Scale the button to 80% of its original size */
         transform-origin: top right; /* Scale from the top-right corner */
     }
 
@@ -74,6 +74,8 @@
         flex-direction: row; /* Arrange buttons horizontally */
         justify-content: space-between; /* Distribute buttons evenly */
         gap: 4px; /* Reduce spacing for better fit */
+        transform: scale(0.9);
+        transform-origin: top left;
     }
 
     /* Adjust .tablinks for smaller buttons */
