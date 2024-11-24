@@ -101,7 +101,7 @@
     .bmac {
         top: 10px; /* Slightly more spacing for balance */
         right: 10px; /* Consistent alignment */
-        font-size: 14px; /* Ensure readability on higher-res displays */
+        font-size: 12px; /* Ensure readability on higher-res displays */
         padding: 6px 12px; /* Balanced padding */
     }
 
@@ -123,7 +123,7 @@
 
     /* Adjust .tabcontent for mobile screens */
     .tabcontent {
-        top: 20px; /* Reset position */
+        top: 40px; /* Reset position */
         left: 10px; /* Slight inward alignment */
         width: calc(100% - 20px); /* Responsive width with padding */
         max-width: 380px; /* Limit width for better fit */
@@ -132,7 +132,7 @@
     }
 
     body {
-        margin-top: 150px;
+        margin-top: 200px;
     }
 }
 
