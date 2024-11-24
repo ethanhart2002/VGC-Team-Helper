@@ -95,29 +95,9 @@
     }
 
     body {
-        margin-top: 100px;
+        margin-top: auto;
     }
 }
-
-/*@media screen and (max-width: 414px) {*/
-/*    body {*/
-/*        margin-top: 120px; !* Space to account for fixed .bmac and .tab *!*/
-/*    }*/
-
-/*    .bmac {*/
-/*        top: 10px; !* Maintain position at the very top *!*/
-/*    }*/
-
-/*    .tab {*/
-/*        top: 50px; !* Positioned just below .bmac *!*/
-/*    }*/
-
-/*    .tabcontent {*/
-/*        top: auto; !* Prevent conflicting positioning *!*/
-/*        margin-top: 10px; !* Space below the tabs *!*/
-/*    }*/
-/*}*/
-
 
 /* General Body Styles */
 body {
