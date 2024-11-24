@@ -198,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let hostPath = "https://vgcteamhelper.com/analyze";
 
         //local debug
-        hostPath = "http://localhost:8080/analyze";
+        //hostPath = "http://localhost:8080/analyze";
 
         try {
             const response = await fetch(hostPath, {

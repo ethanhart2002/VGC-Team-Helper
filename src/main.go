@@ -142,7 +142,7 @@ func main() {
 	//local debug
 	//err := http.ListenAndServe(":8080", nil)
 
-	err := http.ListenAndServe(":8080", nil)
+	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)
 		return
