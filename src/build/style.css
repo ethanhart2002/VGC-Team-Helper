@@ -58,42 +58,82 @@
 /* General styles for larger screens remain unchanged */
 
 /* Responsive adjustments for smaller screens */
-@media screen and (max-width: 768px) {
-    /* Adjust .bmac for mobile screens */
-    .bmac {
-        top: 5px; /* Reduce distance from the top */
-        right: 5px; /* Reduce distance from the right */
-        font-size: 14px; /* Adjust font size if applicable */
-        padding: 5px 10px; /* Compact padding for a cleaner look */
-    }
+/*@media screen and (max-width: 768px) {*/
+/*    !* Adjust .bmac for mobile screens *!*/
+/*    .bmac {*/
+/*        top: 5px; !* Reduce distance from the top *!*/
+/*        right: 5px; !* Reduce distance from the right *!*/
+/*        font-size: 14px; !* Adjust font size if applicable *!*/
+/*        padding: 5px 10px; !* Compact padding for a cleaner look *!*/
+/*    }*/
 
-    /* Adjust .tab for mobile screens */
-    .tab {
-        top: auto; /* Reset position */
-        bottom: 10px; /* Position at the bottom for easier access */
-        left: 10px; /* Keep it near the edge */
-        flex-direction: row; /* Align buttons horizontally for better fit */
-        gap: 3px; /* Reduce spacing between buttons */
-    }
+/*    !* Adjust .tab for mobile screens *!*/
+/*    .tab {*/
+/*        top: auto; !* Reset position *!*/
+/*        bottom: 10px; !* Position at the bottom for easier access *!*/
+/*        left: 10px; !* Keep it near the edge *!*/
+/*        flex-direction: row; !* Align buttons horizontally for better fit *!*/
+/*        gap: 3px; !* Reduce spacing between buttons *!*/
+/*    }*/
 
-    /* Adjust tab buttons */
-    .tablinks {
-        font-size: 12px; /* Reduce font size */
-        padding: 8px 12px; /* Compact padding */
-    }
+/*    !* Adjust tab buttons *!*/
+/*    .tablinks {*/
+/*        font-size: 12px; !* Reduce font size *!*/
+/*        padding: 8px 12px; !* Compact padding *!*/
+/*    }*/
 
-    /* Adjust tab content for smaller screens */
-    .tabcontent {
-        top: auto; /* Reset position */
-        bottom: 60px; /* Move above the tab buttons */
-        left: 5px; /* Reduce left margin for better fit */
-        width: calc(100% - 20px); /* Make it responsive */
-        max-width: 300px; /* Optional: Limit the maximum width */
-        padding: 8px; /* Compact padding */
-    }
-}
+/*    !* Adjust tab content for smaller screens *!*/
+/*    .tabcontent {*/
+/*        top: auto; !* Reset position *!*/
+/*        bottom: 60px; !* Move above the tab buttons *!*/
+/*        left: 5px; !* Reduce left margin for better fit *!*/
+/*        width: calc(100% - 20px); !* Make it responsive *!*/
+/*        max-width: 300px; !* Optional: Limit the maximum width *!*/
+/*        padding: 8px; !* Compact padding *!*/
+/*    }*/
+/*}*/
  /*************************************************************Todo
   */
+
+/* Target screens for iPhone 11 and up (414px width in portrait mode) */
+@media screen and (max-width: 414px) {
+    /* Adjust .bmac for compact placement */
+    .bmac {
+        top: 10px; /* Slightly more spacing for balance */
+        right: 10px; /* Consistent alignment */
+        font-size: 14px; /* Ensure readability on higher-res displays */
+        padding: 6px 12px; /* Balanced padding */
+    }
+
+    /* Adjust .tab for better usability on mobile */
+    .tab {
+        top: auto; /* Remove absolute top alignment */
+        bottom: 15px; /* Place near the bottom for easier thumb access */
+        left: 10px; /* Align slightly inward */
+        flex-direction: row; /* Arrange buttons horizontally */
+        justify-content: space-between; /* Distribute buttons evenly */
+        gap: 4px; /* Reduce spacing for better fit */
+    }
+
+    /* Adjust .tablinks for smaller buttons */
+    .tablinks {
+        font-size: 13px; /* Slightly reduced font for smaller buttons */
+        padding: 8px 10px; /* Compact padding */
+        border-radius: 4px; /* Round edges slightly for better touch feel */
+    }
+
+    /* Adjust .tabcontent for mobile screens */
+    .tabcontent {
+        top: auto; /* Reset position */
+        bottom: 60px; /* Position above the tabs */
+        left: 10px; /* Slight inward alignment */
+        width: calc(100% - 20px); /* Responsive width with padding */
+        max-width: 380px; /* Limit width for better fit */
+        padding: 10px; /* Adjust padding */
+        font-size: 14px; /* Ensure readability on smaller screens */
+    }
+}
+
 
 
 /* General Body Styles */
