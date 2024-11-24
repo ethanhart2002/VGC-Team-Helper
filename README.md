@@ -1,5 +1,6 @@
 # VGC-Team-Helper
 Website: [VGC Team Helper](https://vgcteamhelper.com/)
+
 Please consider leaving a Watch or a Star if you're interested in following this project!
 
 ## License
