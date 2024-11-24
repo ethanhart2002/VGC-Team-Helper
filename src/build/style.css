@@ -1,4 +1,10 @@
 
+.bmac {
+    top: 10px; /* Align to the top */
+    right: 10px; /* Align to the right */
+    position: absolute;
+}
+
 /* Tab container */
 .tab {
     position: absolute; /* Allows precise placement */
@@ -45,6 +51,49 @@
 .tabcontent.active {
     display: block;
 }
+
+/*********************************************************************** TODO
+ */
+
+/* General styles for larger screens remain unchanged */
+
+/* Responsive adjustments for smaller screens */
+@media screen and (max-width: 768px) {
+    /* Adjust .bmac for mobile screens */
+    .bmac {
+        top: 5px; /* Reduce distance from the top */
+        right: 5px; /* Reduce distance from the right */
+        font-size: 14px; /* Adjust font size if applicable */
+        padding: 5px 10px; /* Compact padding for a cleaner look */
+    }
+
+    /* Adjust .tab for mobile screens */
+    .tab {
+        top: auto; /* Reset position */
+        bottom: 10px; /* Position at the bottom for easier access */
+        left: 10px; /* Keep it near the edge */
+        flex-direction: row; /* Align buttons horizontally for better fit */
+        gap: 3px; /* Reduce spacing between buttons */
+    }
+
+    /* Adjust tab buttons */
+    .tablinks {
+        font-size: 12px; /* Reduce font size */
+        padding: 8px 12px; /* Compact padding */
+    }
+
+    /* Adjust tab content for smaller screens */
+    .tabcontent {
+        top: auto; /* Reset position */
+        bottom: 60px; /* Move above the tab buttons */
+        left: 5px; /* Reduce left margin for better fit */
+        width: calc(100% - 20px); /* Make it responsive */
+        max-width: 300px; /* Optional: Limit the maximum width */
+        padding: 8px; /* Compact padding */
+    }
+}
+ /*************************************************************Todo
+  */
 
 
 /* General Body Styles */

@@ -115,9 +115,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
-
-    // There is a discrepancy between how Pokepaste names certain Pokemon vs PokemonDB, so
-    // we will need to convert them sometimes.
+    /**
+     * We need to translate between the names of returned Pokemon and the Pokemon names in PokemonDB.
+     *
+     */
     const nameDict = {
         "Pyroar-M": "Pyroar-Male",
         "Pyroar-F": "Pyroar-Female",
@@ -179,6 +180,9 @@ document.addEventListener("DOMContentLoaded", function () {
         "Darmanitan-Galar": "Darmanitan-Galarian",
         "Yanmask-Galar": "Yanmask-Galarian",
         "Stunfisk-Galar": "Stunfisk-Galarian",
+        "Calyrex-Shadow": "Calyrex-Shadow-Rider",
+        "Calyrex-Ice": "Calyrex-Ice-Rider",
+        "Terapagos": "Terapagos-Normal",
         //TODO Add more naming convention fixes when they come up
     };
 
