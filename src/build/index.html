@@ -7,16 +7,54 @@
     background-image: url('./BattleBackground.png');
     background-attachment: scroll;
     background-repeat: repeat;
+    z-index: 0;
   }</style>
   <title>VGC Team Helper</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
 <div id="app">
-  <div class="logo">
-    <span class="red">VGC</span>
-    <span class="blue">Team</span>
-    <span class="yellow">Helper</span>
+
+  <div class="tab">
+    <button class="tablinks" data-tab="About">About</button>
+    <button class="tablinks" data-tab="Contributing">Contributing</button>
+    <button class="tablinks" data-tab="Contact">Contact</button>
+  </div>
+
+  <div id="About" class="tabcontent">
+    <h3>About</h3>
+    <p>VGC Team Helper is a tool created by Ethan Hart that aims to provide exceptional analysis of a user's Pokémon team. This is done through inspecting teams for elements that
+      have been staples in VGC throughout the format's history, such as type cores, coverage moves, modes, and supporting moves.
+    </p>
+    <br>
+    <p>This tool currently only provides analysis in the context of Pokémon's official competitive format, Pokémon VGC. To use this tool, go to <a href="https://pokemonshowdown.com/">Pokémon Showdown</a>, create a Pokémon team using
+    the Teambuilder, and export your team to Pokepaste. Once you've received your Pokepaste link, copy and paste the link into this site's form to receive your analysis and grade.
+    </p>
+  </div>
+
+  <div id="Contributing" class="tabcontent">
+    <h3>Contributing</h3>
+    <p>If you would like to contribute to this project, report an issue, or just read the source code, visit the
+      official <a href="https://github.com/ethanhart2002/VGC-Team-Helper">VGC Team Helper GitHub.</a>
+    </p>
+  </div>
+
+  <div id="Contact" class="tabcontent">
+    <h3>Contact</h3>
+    <ul>
+      <li>Email: ethanhartdev@gmail.com</li>
+      <li>GitHub: <a href="https://github.com/ethanhart2002/VGC-Team-Helper">VGC-Team-Helper</a> </li>
+      <li>X: <a href="https://x.com/VGCTeamHelper">@VGCTeamHelper</a> </li>
+    </ul>
+  </div>
+
+  <div class="logo-container">
+    <div class="logo">
+      <span class="red">VGC</span>
+      <span class="blue">Team</span>
+      <span class="yellow">Helper</span>
+    </div>
   </div>
   <form id="analyze-form">
     <label for="teamLink">Enter Pokepaste Link:</label>

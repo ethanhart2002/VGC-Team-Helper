@@ -10,6 +10,30 @@ document.addEventListener("DOMContentLoaded", function () {
     const coverage = document.getElementById("coverage");
     const support = document.getElementById("support");
     const score = document.getElementById("score");
+    const tablinks = document.querySelectorAll(".tablinks");
+    const tabcontents = document.querySelectorAll(".tabcontent");
+
+
+    tablinks.forEach((button) => {
+        button.addEventListener("click", function () {
+            const target = document.querySelector(`#${this.getAttribute("data-tab")}`);
+
+            // Toggle the active class on the clicked button and its content
+            const isActive = this.classList.contains("active");
+
+            // Hide all other panels and remove active state from other buttons
+            tablinks.forEach((btn) => btn.classList.remove("active"));
+            tabcontents.forEach((content) => content.classList.remove("active"));
+
+            // If the clicked button wasn't already active, activate it
+            if (!isActive) {
+                this.classList.add("active");
+                if (target) {
+                    target.classList.add("active");
+                }
+            }
+        });
+    });
 
 
 
@@ -158,6 +182,9 @@ document.addEventListener("DOMContentLoaded", function () {
         //TODO Add more naming convention fixes when they come up
     };
 
+
+
+
     form.addEventListener("submit", async function (event) {
         event.preventDefault();
 
@@ -171,7 +198,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let hostPath = "https://vgcteamhelper.com/analyze";
 
         //local debug
-        //hostPath = "https://localhost/analyze";
+        hostPath = "http://localhost:8080/analyze";
 
         try {
             const response = await fetch(hostPath, {
