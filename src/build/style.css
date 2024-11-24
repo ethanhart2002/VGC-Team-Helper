@@ -103,8 +103,8 @@
         right: 10px; /* Consistent alignment */
         font-size: 12px; /* Ensure readability on higher-res displays */
         padding: 6px 12px; /* Balanced padding */
-        transform: scale(0.7); /* Scale the button to 80% of its original size */
-        transform-origin: top right; /* Scale from the top-right corner */
+        transform: scale(0.5); /* Scale the button to 80% of its original size */
+        transform-origin: bottom left; /* Scale from the top-right corner */
     }
 
     /* Adjust .tab for better usability on mobile */
@@ -134,7 +134,7 @@
     }
 
     body {
-        margin-top: 200px;
+        margin-top: 300px;
     }
 }
 
