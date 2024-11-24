@@ -1,4 +1,51 @@
 
+/* Tab container */
+.tab {
+    position: absolute; /* Allows precise placement */
+    top: 10px; /* Distance from the top of the page */
+    left: 10px; /* Distance from the left of the page */
+    display: flex; /* Align buttons horizontally */
+    flex-direction: column; /* Stack buttons vertically */
+    gap: 5px; /* Small spacing between buttons */
+}
+
+/* Tab buttons */
+.tablinks {
+    font-size: 15px; /* Small text size */
+    padding: 10px 15px; /* Small padding for a compact look */
+    background-color: #3498db; /* Neutral background color */
+    border: 1px solid #ccc; /* Light border */
+    cursor: pointer; /* Pointer cursor for interactivity */
+    text-align: center; /* Center text */
+    border-radius: 5px; /* Slightly rounded edges */
+}
+
+/* Active tab button */
+.tablinks.active {
+    background-color: #007bff; /* Highlight active button */
+    color: white; /* Contrast text color */
+    border-color: #0056b3; /* Darker border for active button */
+}
+
+/* Tab content */
+.tabcontent {
+    display: none; /* Hidden by default */
+    position: absolute; /* Overlay content if shown */
+    top: 160px; /* Offset from the tab buttons */
+    left: 10px; /* Align with buttons */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    border: 1px solid #ccc; /* Light border */
+    padding: 10px; /* Padding for inner content */
+    width: 250px; /* Fixed width for content */
+    z-index: 1; /* Make sure it overlays other elements */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for a popup effect */
+}
+
+/* Show active tab content */
+.tabcontent.active {
+    display: block;
+}
+
 
 /* General Body Styles */
 body {
@@ -26,24 +73,35 @@ body {
     100% { transform: rotate(360deg); }
 }
 
+.logo-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .logo {
-    display: flex; /* Flex layout */
+    display: inline-flex; /* Inline to wrap snugly around content */
     gap: 0.4rem; /* Space between words */
     align-items: center;
-    justify-content: center; /* Center the text horizontally */
+    justify-content: center;
     font-weight: bold;
     font-size: 2.5rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-    margin: 20px 0;
-    text-align: center; /* Ensure proper text alignment */
+    text-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
+    margin: 20px auto; /* Center it on the page horizontally */
+    text-align: center;
+    padding: 0.5rem 1rem; /* Padding for spacing inside the background */
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white */
+    border-radius: 8px; /* Rounded corners for aesthetics */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: subtle shadow */
 }
+
 
 .logo .red {
     color: #FF1C1C; /* Pokémon red */
 }
 
 .logo .blue {
-    color: #0066FF; /* Pokémon blue */
+    color: #3498db; /* Pokémon blue */
 }
 
 .logo .yellow {
