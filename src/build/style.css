@@ -95,6 +95,9 @@
         font-size: 14px; /* Ensure readability on smaller screens */
         margin-top: 40px;
     }
+    .logo-container {
+        transform: scale(.9);
+    }
 
     body {
         margin-top: auto;
