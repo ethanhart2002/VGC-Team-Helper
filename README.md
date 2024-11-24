@@ -1,7 +1,7 @@
 # VGC-Team-Helper
 
 ## License
-See the License [here](#LICENSE.md).
+See the License [here](#LICENSE).
 
 
 ## Description
