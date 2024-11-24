@@ -1,5 +1,8 @@
 # VGC-Team-Helper
 
+## License
+See the License [here](#LICENSE.md).
+
 
 ## Description
 This is the open source code for VGC Team Helper, a project that aims to help players build VGC teams with recommendations based on a provided Pokepaste. At a high level, this project does the following:
@@ -14,5 +17,16 @@ For more information on cores, modes, support moves, and coverage moves, visit [
 1. Ensure Go is installed on your system: [Download Go](https://go.dev/doc/install)
 2. Clone this repository to your local machine.
 3. Navigate to the project's directory in your clone, and then navigate to the src directory.
-4. 
-5. Run "go build ." to build a binary
+4. Visit main.go to change the listening port as directed in func main(), and visit build/script.js to change the hostname from vgcteamhelper.com to the corresponding localhost port as directed in the file.
+5. Save the changes and run "go run ." in the src directory.
+
+
+## Contributing
+We welcome contributions. To contribute:
+1. Fork this repository off of the main branch. 
+2. Create a new branch in your fork. Give it a descriptive name for the change you wish to make. 
+3. Follow the steps above in Installation to clone your fork locally and set it up for local testing.
+4. Once changes are made, push your branch to your original fork.
+5. Submit a pull request into the dev branch of this repo. 
+
+
