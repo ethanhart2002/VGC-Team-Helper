@@ -183,6 +183,7 @@ document.addEventListener("DOMContentLoaded", function () {
         "Calyrex-Shadow": "Calyrex-Shadow-Rider",
         "Calyrex-Ice": "Calyrex-Ice-Rider",
         "Terapagos": "Terapagos-Normal",
+        "Tatsugiri": "Tatsugiri-Curly",
         //TODO Add more naming convention fixes when they come up
     };
 
