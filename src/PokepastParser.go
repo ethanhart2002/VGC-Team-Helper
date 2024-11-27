@@ -186,10 +186,10 @@ func parse(pokeInfo string, flag bool) Pokemon {
 	// Parse type(s)
 	types, err := getPokemonType(strings.ToLower(p.Name))
 	if err != nil {
-		log.Fatal(err)
+		p.Type = append(p.Type, "Error: Couldn't lookup the type for this Pokemon.")
+	} else {
+		p.Type = types
 	}
-	p.Type = types
-
 	// Parse ability
 	if matches := abilityRegex.FindStringSubmatch(pokeInfo); len(matches) > 1 {
 		p.Ability = matches[1]
@@ -234,6 +234,7 @@ func RunParser(path string) ([]Pokemon, string) {
 	var team []Pokemon
 	var jsonTxt string
 
+	//debugging line:
 	//jsonTxt = jsonTxt + "\nYour team:\n" + "--------------------------------\n"
 
 	// Get the Pokepaste
