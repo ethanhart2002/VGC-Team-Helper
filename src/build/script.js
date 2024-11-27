@@ -78,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
 
+    // Fetches Pokemon images and sets their hover text
     function parseStructs(teamMembers) {
         const container = document.getElementById("team-container");
 
@@ -88,13 +89,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const structElement = document.createElement("div");
             structElement.classList.add("pokemon-container"); // Add class for styling
 
+            //ternary statement that determines if a name translation for pokemondb is needed.
             const pokemonName = struct.pokemon in nameDict ? nameDict[struct.pokemon] : struct.pokemon;
             const spriteUrl = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${pokemonName.toLowerCase()}.png`;
 
             const img = document.createElement('img');
             img.src = spriteUrl;
             img.alt = struct.pokemon;
-            img.onerror = () => { img.style.display = 'none'; }; // Hide image if not found
+            img.onerror = () => { img.src = './404.png'; }; //error image
             img.classList.add("pokemon-image")
 
             const textContainer = document.createElement('div');

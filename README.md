@@ -1,5 +1,7 @@
 # VGC-Team-Helper
 
+## Version: 1.0.1
+
 ## License
 See the License [here](./LICENSE).
 
