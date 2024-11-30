@@ -53,6 +53,7 @@ func CoreReport(team []Pokemon) (string, float64) {
 	}
 
 	var score float64
+	fullCore := false
 
 	/**
 	Grading strategy: Assign a base score for COMPLETED CORES. Cores are weighted FWG > DFS > PDF based on historical data.
@@ -63,32 +64,39 @@ func CoreReport(team []Pokemon) (string, float64) {
 		report.WriteString("\nGood job! Your team has a fire-water-grass core. This is one of the staple offensive " +
 			"and defensive cores in Pokemon. Consider adding Pokemon to hit other popular types like Dragon and Steel. ")
 		score = 8.0
+		fullCore = true
 	} else if dfs && !fwg && !pdf {
 		report.WriteString("\nGood job! Your team has a dragon-fairy-steel core. This core can combat many elemental types" +
 			" such as fire, water, grass, and electric. Consider adding Pokemon with types/moves that beat the fire, poison, " +
 			"and ground types that counter this core.")
 		score = 7.8
+		fullCore = true
 	} else if pdf && !fwg && !dfs {
 		report.WriteString("\nGood job! Your team has a psychic-dark-fighting core. Pokemon with these types have excellent " +
 			"offensive synergy. Consider adding Pokemon with defensive tools to support your team, such as redirection, screens, " +
 			"intimidate, or more.")
 		score = 7.6
+		fullCore = true
 	} else if fwg && dfs && !pdf {
 		report.WriteString("\nExcellent! Your team has both a fire-water-grass core and a dragon-fairy-steel core. You have consistent " +
 			"defensive and offensive types that complement each other well.")
 		score = 9.0
+		fullCore = true
 	} else if fwg && pdf && !dfs {
 		report.WriteString("\nExcellent! Your team has both a fire-water-grass core and a psychic-dark-fighting core. You have consistent " +
 			"defensive and offensive types that complement each other well.")
 		score = 9.0
+		fullCore = true
 	} else if pdf && dfs && !fwg {
 		report.WriteString("\nExcellent! your team has both a dragon-fairy-steel core and a psychic-dark-fighting core. You have consistent" +
 			" resistances as well as good offensive coverage.")
 		score = 9.0
+		fullCore = true
 	} else if pdf && dfs && fwg {
 		report.WriteString("\nWOW! You've somehow created a team with a fire-water-grass core, a dragon-fairy-steel core, " +
 			"and a psychic-dark-fighting core. You have excellent offensive and defensive coverage typing across the board.")
 		score = 10.0
+		fullCore = true
 
 	}
 
@@ -160,7 +168,9 @@ func CoreReport(team []Pokemon) (string, float64) {
 		} else {
 			score = 9.0
 		}
-	} else {
+	}
+
+	if fullCore == false {
 		report.WriteString("\nWe didn't detect any common type core. Consider adding popular type cores such as fire-water-grass," +
 			" dragon-fairy-steel, or psychic-dark-fighting.")
 		if score == 0 {
