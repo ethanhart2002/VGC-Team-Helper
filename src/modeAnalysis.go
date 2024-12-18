@@ -178,7 +178,7 @@ func ModeReport(team []Pokemon) (string, float64) {
 
 	if rainFlag {
 		report.WriteString("\nRain mode detected. Consider adding Pokemon that benefit from the sun, such as Water, Grass, Bug, and Steel types. Pokemon with abilities such as " +
-			"Swift Swim also benefit from the sun.")
+			"Swift Swim also benefit from the rain.")
 	}
 
 	if sandFlag {
