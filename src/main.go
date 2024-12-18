@@ -23,7 +23,9 @@ type Analysis struct {
 // CORS middleware function to add CORS headers
 func enableCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "https://vgc-team-helper-wfmlb.ondigitalocean.app") // Adjust for your frontend's origin
+		//TODO
+		//w.Header().Set("Access-Control-Allow-Origin", "https://vgc-team-helper-wfmlb.ondigitalocean.app") // Adjust for your frontend's origin
+		w.Header().Set("Access-Control-Allow-Origin", "https://vgcteamhelper.com")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 		if r.Method == "OPTIONS" {
@@ -101,7 +103,7 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 
 	//Debugging print for scores commented out below
-	//fmt.Printf("core: %d, mode: %d, coverage: %d, supp: %d", coreScore, modeScore, coverageScore, suppScore)
+	//fmt.Printf("core: %.2f, mode: %.2f, coverage: %.2f, supp: %.2f \n", coreScore, modeScore, coverageScore, suppScore)
 
 	s := coreScore*.3 + modeScore*.3 + coverageScore*.2 + suppScore*.2
 	total := fmt.Sprintf("%.2f", s)
