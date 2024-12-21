@@ -29,6 +29,9 @@ func ModeReport(team []Pokemon) (string, float64) {
 	sandFlag := false
 	snowFlag := false
 
+	// Other forms of speed control
+	miscSpeed := false
+
 	var modeCount int
 
 	// Check for Trick Room, Tailwind, Psyspam, Perish Song, Weather, and Balance
@@ -113,6 +116,14 @@ func ModeReport(team []Pokemon) (string, float64) {
 				SetupFlag = true
 				modeCount++
 			}
+
+			if strings.Contains(move, "Tailwind") || strings.Contains(move, "Trick Room") ||
+				strings.Contains(move, "Icy Wind") || strings.Contains(move, "Electroweb") ||
+				strings.Contains(move, "Glaciate") || strings.Contains(move, "Sticky Web") ||
+				strings.Contains(move, "Thunder Wave") || strings.Contains(move, "Scary Face") {
+				miscSpeed = true
+				modeCount++
+			}
 		}
 	}
 
@@ -189,6 +200,11 @@ func ModeReport(team []Pokemon) (string, float64) {
 	if snowFlag {
 		report.WriteString("\nSnow mode detected. Consider adding Pokemon that benefit from the snow like Ice types. Pokemon with abilities such as " +
 			"Slush Rush and Snow Cloak also benefit from the snow.")
+	}
+
+	if miscSpeed {
+		report.WriteString("\nYou have moves that induce speed control such as Icy Wind, Electroweb, and Thunder Wave. These moves are suitable ways to control the speed " +
+			"of battle without Tailwind or Trick Room.")
 	}
 
 	var score float64
