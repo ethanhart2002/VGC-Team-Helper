@@ -147,8 +147,8 @@ func ModeReport(team []Pokemon) (string, float64) {
 			report.WriteString("\nWe detected redirection on your team, which is usually an element of a Balance team. While not necessary, Pokemon with Fake Out " +
 				"synergize well on teams with redirection. Consider adding a Pokemon with Fake Out.")
 		}
-	} else if FOCount >= 2 {
-		report.WriteString("\nWe detected common elements of a Balance mode with multiple Fake Out users. This mode is flexible and a variety of Pokemon can " +
+	} else if FOCount >= 1 {
+		report.WriteString("\nWe detected common elements of a Balance mode with Fake Out users. This mode is flexible and a variety of Pokemon can " +
 			"fit on Balance teams. Consider adding type cores recommended by the Core Report to round out this team.")
 	} else {
 		report.WriteString("\nNo Balance mode detected. Although Balance is an amorphous term in VGC, Balance teams commonly have Pokemon with the moves Fake Out " +
