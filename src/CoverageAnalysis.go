@@ -11,7 +11,7 @@ import (
 	"strings"
 )
 
-var chart = [][]float64{
+var typeChart = [][]float64{
 	{1, 1, 1, 1, 1, 0.5, 1, 0, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1},           // normal 0
 	{2, 1, 0.5, 0.5, 1, 2, 0.5, 0, 2, 1, 1, 1, 1, 0.5, 2, 1, 2, 0.5},     // fighting 1
 	{1, 2, 1, 1, 1, 0.5, 2, 1, 0.5, 1, 1, 2, 0.5, 1, 1, 1, 1, 1},         // flying 2
@@ -53,7 +53,7 @@ var typeMapGetString = map[int]string{
 	17: "fairy",
 }
 
-var typeMapGetNum = map[string]int{
+var typeMapGetIndex = map[string]int{
 	"normal":   0,
 	"fighting": 1,
 	"flying":   2,
@@ -155,9 +155,9 @@ Strategy:
 
 */
 
-func CoverageReport(team []Pokemon) ([]string, float64) {
+func CoverageReport(team []Pokemon) ([]string, mapset.Set[string], map[string]int, float64) {
 
-	typesFound := mapset.NewSet[string]()
+	typesHitSuperEffectively := mapset.NewSet[string]()
 	allTypes := mapset.NewSet[string](
 		"normal",
 		"fighting",
@@ -179,6 +179,28 @@ func CoverageReport(team []Pokemon) ([]string, float64) {
 		"fairy",
 	)
 
+	foundCoverageTypes := mapset.NewSet[string]()
+	var foundTypeFrequency = map[string]int{
+		"normal":   0,
+		"fighting": 0,
+		"flying":   0,
+		"poison":   0,
+		"ground":   0,
+		"rock":     0,
+		"bug":      0,
+		"ghost":    0,
+		"steel":    0,
+		"fire":     0,
+		"water":    0,
+		"grass":    0,
+		"electric": 0,
+		"psychic":  0,
+		"ice":      0,
+		"dragon":   0,
+		"dark":     0,
+		"fairy":    0,
+	}
+
 	for _, pokemon := range team {
 		for _, moveString := range pokemon.Moves {
 			move := moveTranslate(moveString)
@@ -188,15 +210,17 @@ func CoverageReport(team []Pokemon) ([]string, float64) {
 			}
 			// do type checking
 			if dmgClass == "physical" || dmgClass == "special" {
-				typeNum, valid := typeMapGetNum[strings.ToLower(moveType)]
+				typeNum, valid := typeMapGetIndex[strings.ToLower(moveType)]
 				if !valid {
 					fmt.Errorf("Couldn't find move: %s  in map", moveType)
 				} else {
-					typeEffectiveness := chart[typeNum]
+					foundCoverageTypes.Add(strings.ToLower(moveType))
+					foundTypeFrequency[strings.ToLower(moveType)]++
+					typeEffectiveness := typeChart[typeNum]
 					for i, num := range typeEffectiveness {
 						if num == 2 {
 							s := typeMapGetString[i]
-							typesFound.Add(s)
+							typesHitSuperEffectively.Add(s)
 						}
 					}
 				}
@@ -205,7 +229,7 @@ func CoverageReport(team []Pokemon) ([]string, float64) {
 	}
 
 	//create a set that will contain types the team can't hit super effectively.
-	difference := allTypes.SymmetricDifference(typesFound)
+	difference := allTypes.SymmetricDifference(typesHitSuperEffectively)
 
 	s := strings.Builder{}
 
@@ -216,7 +240,7 @@ func CoverageReport(team []Pokemon) ([]string, float64) {
 	if difference.Cardinality() == 0 {
 		s.WriteString("\nYour team has coverage options to hit all 18 types!")
 		score = 10
-		return missingTypes, score
+		return missingTypes, foundCoverageTypes, foundTypeFrequency, score
 	} else {
 		for missingType := range difference.Iter() {
 			missingTypes = append(missingTypes, missingType)
@@ -229,7 +253,7 @@ func CoverageReport(team []Pokemon) ([]string, float64) {
 
 		score = 10 - (float64(difference.Cardinality()) * .55)
 
-		return missingTypes, score
+		return missingTypes, foundCoverageTypes, foundTypeFrequency, score
 
 	}
 

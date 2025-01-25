@@ -83,6 +83,7 @@ var nameMap = map[string]string{
 	"minior":    "minior-red",
 	"mimikyu":   "mimikyu-disguised",
 	"tatsugiri": "tatsugiri-curly",
+	"urshifu":   "urshifu-single-strike",
 	//TODO
 }
 
@@ -127,7 +128,7 @@ func fetchPokemonData(pokemonName string) (*http.Response, error) {
 }
 
 // GetPokemonType fetches and returns the types of a given Pokémon
-func getPokemonType(pokemonName string) ([]string, error) {
+func GetPokemonType(pokemonName string) ([]string, error) {
 
 	// Send GET request through a special function
 	response, err := fetchPokemonData(pokemonName)
@@ -184,7 +185,7 @@ func parse(pokeInfo string, flag bool) Pokemon {
 	}
 
 	// Parse type(s)
-	types, err := getPokemonType(strings.ToLower(p.Name))
+	types, err := GetPokemonType(strings.ToLower(p.Name))
 	if err != nil {
 		p.Type = append(p.Type, "Error: Couldn't lookup the type for this Pokemon.")
 	} else {
