@@ -3,6 +3,7 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	mapset "github.com/deckarep/golang-set/v2"
 	"log"
 	"net/http"
 	"strconv"
@@ -11,20 +12,25 @@ import (
 )
 
 type Analysis struct {
-	//Team     string  `json:"team"`
 	Team     []Pokemon `json:"team"`
 	Core     string    `json:"core"`
 	Mode     string    `json:"mode"`
 	Coverage []string  `json:"coverage"`
 	Support  string    `json:"support"`
+	Meta     Meta      `json:"meta_matchups"`
 	Score    float64   `json:"score"`
+}
+
+type Meta struct {
+	GoodMU []string `json:"goodMU"`
+	OkMU   []string `json:"okMU"`
+	BadMU  []string `json:"badMU"`
 }
 
 // CORS middleware function to add CORS headers
 func enableCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		//TODO
-		//w.Header().Set("Access-Control-Allow-Origin", "https://vgc-team-helper-wfmlb.ondigitalocean.app") // Adjust for your frontend's origin
 		w.Header().Set("Access-Control-Allow-Origin", "https://vgcteamhelper.com")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -59,8 +65,11 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var core, mode, support string
-	var coverage []string
-	var coreScore, modeScore, coverageScore, suppScore float64
+	var missingCoverageTypes []string
+	var foundCoverageTypes mapset.Set[string]
+	var foundTypesFrequency map[string]int
+	var coreScore, modeScore, coverageScore, suppScore, metaScore float64
+	var goodMU, okMU, badMU []string
 
 	team, _ := RunParser(link)
 
@@ -87,10 +96,11 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 		mode, modeScore = ModeReport(team)
 	}()
 
-	// Coverage analysis
+	// Coverage analysis and Metagame Matchup analysis
 	go func() {
 		defer wg.Done()
-		coverage, coverageScore = CoverageReport(team)
+		missingCoverageTypes, foundCoverageTypes, foundTypesFrequency, coverageScore = CoverageReport(team)
+		goodMU, okMU, badMU, metaScore = MetagameMatchups(foundCoverageTypes, foundTypesFrequency)
 	}()
 
 	// Support analysis
@@ -103,9 +113,10 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 	wg.Wait()
 
 	//Debugging print for scores commented out below
-	//fmt.Printf("core: %.2f, mode: %.2f, coverage: %.2f, supp: %.2f \n", coreScore, modeScore, coverageScore, suppScore)
+	fmt.Printf("\n core: %.2f, mode: %.2f, coverage: %.2f, supp: %.2f, meta: %.2f \n", coreScore, modeScore, coverageScore, suppScore, metaScore)
 
-	s := coreScore*.3 + modeScore*.3 + coverageScore*.2 + suppScore*.2
+	//Score calculation; Each section has 20% weight
+	s := coreScore*.2 + modeScore*.2 + coverageScore*.2 + suppScore*.2 + metaScore*.2
 	total := fmt.Sprintf("%.2f", s)
 	totalScore, err := strconv.ParseFloat(total, 64)
 	if err != nil {
@@ -114,12 +125,19 @@ func analyze(w http.ResponseWriter, r *http.Request) {
 		log.Panicln(e)
 	}
 
+	metaReport := Meta{
+		GoodMU: goodMU,
+		OkMU:   okMU,
+		BadMU:  badMU,
+	}
+
 	res := Analysis{
 		Team:     team,
 		Core:     core,
 		Mode:     mode,
-		Coverage: coverage,
+		Coverage: missingCoverageTypes,
 		Support:  support,
+		Meta:     metaReport,
 		Score:    totalScore,
 	}
 
@@ -138,8 +156,7 @@ func main() {
 
 	http.HandleFunc("/analyze", analyze)
 
-	//For running locally, replace the first parameter below with port 8080, and go to script.js to uncomment the local debug line that reads 'hostPath = "http://localhost:8080/analyze";'
-	//make sure when local testing is done, set port back to 443.
+	//For running locally, go to script.js to uncomment the local debug line that reads 'hostPath = "http://localhost:443/analyze";'
 	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)

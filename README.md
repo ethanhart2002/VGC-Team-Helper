@@ -3,7 +3,17 @@ Website: [VGC Team Helper](https://vgcteamhelper.com/)
 
 Please consider leaving a Watch or a Star if you're interested in following this project!
 
-## Version: 1.0.1
+## Version: 1.1.0
+New to this update:
+1. Additional links to VGC resources.
+2. Fixes UI bug where Paradox Pokemon and Urshifu wouldn't have their images shown in the report.
+3. Analysis of your team's offensive capabilities against the top Pokemon in
+the current metagame. 
+4. Changes to the report to decrease verbosity.
+5. Changes to the overall scoring algorithm to reflect the strength of a team against
+other Pokemon in the metagame.
+6. Changes to the overall scoring algorithm that increases scaling factor in mode scoring, 
+core scoring, and support scoring.
 
 ## License
 See the License [here](./LICENSE).
@@ -22,7 +32,7 @@ For more information on cores, modes, support moves, and coverage moves, visit [
 1. Ensure Go is installed on your system: [Download Go](https://go.dev/doc/install)
 2. Clone this repository to your local machine.
 3. Navigate to the project's directory in your clone, and then navigate to the src directory.
-4. Visit main.go to change the listening port as directed in func main(), and visit build/script.js to change the hostname from vgcteamhelper.com to the corresponding localhost port as directed in the file.
+4. Visit build/script.js to change the hostname from vgcteamhelper.com to the corresponding localhost port as directed in the file.
 5. Save the changes and run "go run ." in the src directory.
 
 

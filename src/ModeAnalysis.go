@@ -112,7 +112,8 @@ func ModeReport(team []Pokemon) (string, float64) {
 				strings.Contains(move, "Howl") || strings.Contains(move, "Hone Claws") || strings.Contains(move, "Clangorous Soul") ||
 				strings.Contains(move, "Work Up") || strings.Contains(move, "Shell Smash") || strings.Contains(move, "Curse") ||
 				strings.Contains(move, "Geomancy") || strings.Contains(move, "Shift Gear") || strings.Contains(move, "Minimize") ||
-				strings.Contains(move, "Baton Pass") || strings.Contains(move, "Shed Tail") { //TODO add more
+				strings.Contains(move, "Baton Pass") || strings.Contains(move, "Shed Tail") || strings.Contains(move, "Electro Shot") ||
+				strings.Contains(move, "Meteor Beam") { //TODO add more
 				SetupFlag = true
 				modeCount++
 			}
@@ -146,8 +147,6 @@ func ModeReport(team []Pokemon) (string, float64) {
 	if PerishFlag {
 		report.WriteString("\nPerish Mode detected. This mode relies on using Perish Song to trap your opponents. Good additions to your team would be a Pokemon " +
 			"with the Shadow Tag ability, the move Protect on many of your Pokemon, and Pokemon that can beat the Ghost types that Perish Song doesn't trap.")
-	} else {
-		report.WriteString("\nNo Perish mode detected.")
 	}
 
 	if RedirectionFlag {
@@ -169,9 +168,6 @@ func ModeReport(team []Pokemon) (string, float64) {
 	if PsyFlag {
 		report.WriteString("\nWe detected a Psyspam mode on your team. Psyspam can excel at spreading damage fast and taking quick knockouts. Make sure your team " +
 			"has Pokemon and/or moves that can beat Dark types and types that resist Psychic moves.")
-	} else {
-		report.WriteString("\nNo Psyspam mode detected. If you are looking for a fast offensive mode that can take knockouts quickly, Psyspam (Psychic Terrain + Expanding Force) " +
-			"could be a good mode to add.")
 	}
 
 	if SetupFlag {
@@ -210,14 +206,14 @@ func ModeReport(team []Pokemon) (string, float64) {
 	var score float64
 
 	/**
-	Strategy for grading modes: >= 3 modes scores 10/10, 2 modes is an 8/10, 1 mode is a 6/10, no mode is a 0/10. Having a plan is key!
+	Strategy for grading modes: >= 3 modes scores 10/10, 2 modes is an 8/10, 1 mode is a 4/10, no mode is a 0/10. Having a plan is key!
 	*/
 	if modeCount >= 3 {
 		score = 10
 	} else if modeCount == 2 {
 		score = 8
 	} else if modeCount == 1 {
-		score = 6
+		score = 4
 	} else {
 		score = 0
 	}

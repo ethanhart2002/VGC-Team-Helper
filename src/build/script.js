@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const mode = document.getElementById("mode");
     const coverage = document.getElementById("coverage");
     const support = document.getElementById("support");
+    const metaMatchups = document.getElementById("meta");
     const score = document.getElementById("score");
     const tablinks = document.querySelectorAll(".tablinks");
     const tabcontents = document.querySelectorAll(".tabcontent");
@@ -56,6 +57,32 @@ document.addEventListener("DOMContentLoaded", function () {
             rep += `<br><br><li> If you find your team is struggling against Pokemon of these types, considering adding coverage moves to hit these Pokemon with super effective damage. </li>`;
             coverage.innerHTML = rep;
         }
+    }
+
+    function reportMetaMatchups(matchupData) {
+        metaMatchups.innerHTML = ``;
+        let rep = `<li> Your team has multiple super-effective moves into these current meta Pokemon: </li><br>`;
+        if (matchupData.goodMU != null) {
+            for (let i = 0; i < matchupData.goodMU.length-1; i++) {
+                rep += `<b>${matchupData.goodMU[i]} , </b>`;
+            }
+            rep += `<b>${matchupData.goodMU[matchupData.goodMU.length-1]}</b><br>`
+        }
+        rep += `<br><li> Your team has a single super-effective move into these current meta Pokemon: </li><br>`;
+        if (matchupData.okMU != null) {
+            for (let i = 0; i < matchupData.okMU.length-1; i++) {
+                rep += `<b>${matchupData.okMU[i]} , </b>`;
+            }
+            rep += `<b>${matchupData.okMU[matchupData.okMU.length-1]}</b><br>`
+        }
+        rep += `<br><li> Your team has no super-effective moves into these current meta Pokemon: </li><br>`;
+        if (matchupData.badMU != null) {
+            for (let i = 0; i < matchupData.badMU.length-1; i++) {
+                rep += `<b>${matchupData.badMU[i]} , </b>`;
+            }
+            rep += `<b>${matchupData.badMU[matchupData.badMU.length-1]}</b><br>`
+        }
+        metaMatchups.innerHTML = rep;
     }
 
     function reportScore(scoreInput) {
@@ -186,6 +213,27 @@ document.addEventListener("DOMContentLoaded", function () {
         "Calyrex-Ice": "Calyrex-Ice-Rider",
         "Terapagos": "Terapagos-Normal",
         "Tatsugiri": "Tatsugiri-Curly",
+        "Walking Wake":          "walking-wake",
+        "Iron Leaves":           "iron-leaves",
+        "Raging Bolt":           "raging-bolt",
+        "Gouging Fire":          "gouging-fire",
+        "Iron Boulder":          "iron-boulder",
+        "Iron Crown":            "iron-crown",
+        "Roaring Moon":          "roaring-moon",
+        "Iron Valiant":          "iron-valiant",
+        "Iron Treads":           "iron-treads",
+        "Iron Bundle":           "iron-bundle",
+        "Iron Hands":            "iron-hands",
+        "Iron Jugulis":          "iron-jugulis",
+        "Iron Moth":             "iron-moth",
+        "Iron Thorns":           "iron-thorns",
+        "Great Tusk":            "great-tusk",
+        "Scream Tail":           "scream-tail",
+        "Brute Bonnet":          "brute-bonnet",
+        "Flutter Mane":          "flutter-mane",
+        "Slither Wing":          "slither-wing",
+        "Sandy Shocks":          "sandy-shocks",
+        "Urshifu-Rapid-Strike":  "urshifu",
         //TODO Add more naming convention fixes when they come up
     };
 
@@ -204,8 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let hostPath = "https://vgcteamhelper.com/analyze";
 
-        //local debug - uncomment line below and ensure main.go is listening on port 8080 as well.
-        //hostPath = "http://localhost:8080/analyze";
+        //local debug - uncomment line below.
+        //hostPath = "http://localhost:443/analyze";
 
         try {
             const response = await fetch(hostPath, {
@@ -227,6 +275,9 @@ document.addEventListener("DOMContentLoaded", function () {
             core.innerHTML = handleNewlines(data.core);
             mode.innerHTML = handleNewlines(data.mode);
             reportCoverage(data.coverage)
+            //TODO
+            reportMetaMatchups(data.meta_matchups)
+
             support.innerHTML = handleNewlines(data.support);
             reportScore(data.score);
 
