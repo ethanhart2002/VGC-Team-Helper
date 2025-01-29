@@ -53,8 +53,8 @@
 }
 
 
-/* Target screens for iPhone 11 and up (414px width in portrait mode) */
-@media screen and (max-width: 414px) {
+/* Target screens for iPhone 11 and up  */
+@media screen and (max-width: 414px) {(414px width in portrait mode)
     /* Adjust .bmac for compact placement */
     .bmac {
         position: fixed;
@@ -211,7 +211,7 @@ body {
     padding: 0.5rem;
     border-radius: 5px;
     text-align: left;
-    width: 150px; /* Adjust width as needed */
+    width: 200px; /* Adjust width as needed */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
     z-index: 10;
 }

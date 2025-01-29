@@ -32,7 +32,7 @@ For more information on cores, modes, support moves, and coverage moves, visit [
 1. Ensure Go is installed on your system: [Download Go](https://go.dev/doc/install)
 2. Clone this repository to your local machine.
 3. Navigate to the project's directory in your clone, and then navigate to the src directory.
-4. Visit main.go to change the listening port as directed in func main(), and visit build/script.js to change the hostname from vgcteamhelper.com to the corresponding localhost port as directed in the file.
+4. Visit build/script.js to change the hostname from vgcteamhelper.com to the corresponding localhost port as directed in the file.
 5. Save the changes and run "go run ." in the src directory.
 
 

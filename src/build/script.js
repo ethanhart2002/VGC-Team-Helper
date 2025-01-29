@@ -252,8 +252,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let hostPath = "https://vgcteamhelper.com/analyze";
 
-        //local debug - uncomment line below and ensure main.go is listening on port 8080 as well.
-        //hostPath = "http://localhost:8080/analyze";
+        //local debug - uncomment line below.
+        //hostPath = "http://localhost:443/analyze";
 
         try {
             const response = await fetch(hostPath, {

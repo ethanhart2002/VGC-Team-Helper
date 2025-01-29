@@ -156,8 +156,7 @@ func main() {
 
 	http.HandleFunc("/analyze", analyze)
 
-	//For running locally, replace the first parameter below with port 8080, and go to script.js to uncomment the local debug line that reads 'hostPath = "http://localhost:8080/analyze";'
-	//make sure when local testing is done, set port back to 443.
+	//For running locally, go to script.js to uncomment the local debug line that reads 'hostPath = "http://localhost:443/analyze";'
 	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)
