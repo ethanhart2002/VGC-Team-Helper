@@ -2,49 +2,49 @@ Urshifu-Rapid-Strike
 Incineroar
 Rillaboom
 Flutter Mane
-Tornadus
 Raging Bolt
 Farigiraf
+Tornadus
+Amoonguss
 Calyrex-Shadow
 Whimsicott
 Calyrex-Ice
 Miraidon
-Amoonguss
-Iron Hands
 Chi-Yu
-Indeedee-F
-Chien-Pao
+Iron Hands
 Ogerpon-Hearthflame
+Chien-Pao
+Indeedee-F
+Urshifu
 Landorus
 Kyogre
-Urshifu
-Pelipper
-Ogerpon-Wellspring
 Ogerpon-Cornerstone
+Zamazenta-Crowned
+Pelipper
+Terapagos
+Ogerpon-Wellspring
+Koraidon
+Groudon
 Ursaluna-Bloodmoon
 Grimmsnarl
-Zamazenta-Crowned
-Terapagos
-Koraidon
 Clefairy
-Archaludon
 Iron Valiant
-Groudon
-Torkoal
-Ursaluna
-Zacian-Crowned
+Archaludon
 Dondozo
+Ursaluna
+Torkoal
+Zacian-Crowned
+Roaring Moon
+Tatsugiri
+Weezing-Galar
+Smeargle
+Entei
 Annihilape
 Gholdengo
-Entei
 Ninetales-Alola
-Tatsugiri
-Smeargle
-Kingambit
-Dragonite
-Weezing-Galar
 Walking Wake
-Ting-Lu
-Sinistcha
-Sneasler
+Volcarona
 Regieleki
+Kingambit
+Sableye
+Dragonite
