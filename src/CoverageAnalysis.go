@@ -88,7 +88,7 @@ type Move struct {
 *Need to translate move to corresponding syntax for PokeAPI
  */
 func moveTranslate(move string) string {
-	s := strings.TrimRight(move, " ")
+	s := strings.TrimSpace(move)
 	s = strings.ReplaceAll(s, " ", "-")
 	return s
 }

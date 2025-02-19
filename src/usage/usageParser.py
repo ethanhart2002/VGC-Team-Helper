@@ -1,11 +1,11 @@
 import requests
 
 # URL to a specific month's stats (modify as needed)
-BASE_URL = "https://www.smogon.com/stats/"
-MONTH = "2024-12"
+BASE_URL = "https://www.smogon.com/stats"
+MONTH = "2025-01"
 FILE = "gen9vgc2025regg-0"
 
-url = f"{BASE_URL}-{MONTH}/{FILE}.txt"
+url = f"{BASE_URL}/{MONTH}/{FILE}.txt"
 
 response = requests.get(url)
 if response.status_code == 200:

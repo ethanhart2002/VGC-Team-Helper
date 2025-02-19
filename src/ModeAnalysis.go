@@ -133,7 +133,7 @@ func ModeReport(team []Pokemon) (string, float64) {
 	if TRFlag {
 		report.WriteString("\nTrick Room mode detected. Make sure you have a slow Pokemon that can take advantage of Trick Room. ")
 	} else {
-		report.WriteString("\nWe didnt detect a Trick Room mode. If your team is utilizing a lot of slow Pokemon, consider adding the move Trick Room to your team " +
+		report.WriteString("\nWe didn't detect a Trick Room mode. If your team is utilizing a lot of slow Pokemon, consider adding the move Trick Room to your team " +
 			"so that your slower Pokemon can move first.")
 	}
 

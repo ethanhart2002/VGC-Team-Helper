@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
             <p>Item: ${struct.item}</p>
             <p>Ability: ${struct.ability}</p>
             <p>Tera Type: ${struct.tera_type}</p>
-            <p>Moves: ${struct.moves}</p>
+            <p>Moves: ${struct.moves} </p>
         `;
 
             structElement.appendChild(img);
@@ -246,7 +246,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const teamLink = teamLinkInput.value;
 
         // Show loading indicator and hide error/report messages
-        document.getElementById("loading").style.display = "block";
+        loading.style.display = "block";
         error.style.display = "none";
         report.style.display = "none";
 
@@ -275,9 +275,7 @@ document.addEventListener("DOMContentLoaded", function () {
             core.innerHTML = handleNewlines(data.core);
             mode.innerHTML = handleNewlines(data.mode);
             reportCoverage(data.coverage)
-            //TODO
             reportMetaMatchups(data.meta_matchups)
-
             support.innerHTML = handleNewlines(data.support);
             reportScore(data.score);
 
@@ -288,7 +286,7 @@ document.addEventListener("DOMContentLoaded", function () {
             error.textContent = err.message;
             error.style.display = "block";
         } finally {
-            document.getElementById("loading").style.display = "none";
+            loading.style.display = "none";
         }
     });
 });

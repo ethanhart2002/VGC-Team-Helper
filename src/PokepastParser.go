@@ -170,7 +170,7 @@ func parse(pokeInfo string, flag bool) Pokemon {
 	levelRegex := regexp.MustCompile(`Level: (\d+)`)
 	teraTypeRegex := regexp.MustCompile(`Tera Type: (\w+)`)
 	evsRegex := regexp.MustCompile(`EVs: (.+)`)
-	movesRegex := regexp.MustCompile(`-\s(.+)`)
+	movesRegex := regexp.MustCompile(`-(\s.+)`)
 	natureRegex := regexp.MustCompile(`(\w+) Nature`)
 
 	// Initialize a new Pokemon instance

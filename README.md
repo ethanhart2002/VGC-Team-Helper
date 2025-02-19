@@ -3,7 +3,7 @@ Website: [VGC Team Helper](https://vgcteamhelper.com/)
 
 Please consider leaving a Watch or a Star if you're interested in following this project!
 
-## Version: 1.1.0
+## Version: 1.1.1
 New to this update:
 1. Additional links to VGC resources.
 2. Fixes UI bug where Paradox Pokemon and Urshifu wouldn't have their images shown in the report.
