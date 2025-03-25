@@ -32,7 +32,7 @@ func MetagameMatchups(teamCoverage mapset.Set[string], foundTypesFrequency map[s
 	topPokemonUsage := [50]string{}
 
 	//TODO
-	file, err := os.Open("./usage/gen9vgc2025regg-0-2025-01-Usage.txt")
+	file, err := os.Open("./usage/gen9vgc2025regg-0-2025-02-Usage.txt")
 	if err != nil {
 		log.Fatal(err)
 	}
