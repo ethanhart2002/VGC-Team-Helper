@@ -4,9 +4,13 @@
 *.so
 *.dylib
 *.venv
-
-# Test binary, built with `go test -c`
 *.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
+/src/Pokepast
 *.out
+
+# all this bloat
+/.idea/.gitignore
+/.idea/misc.xml
+/.idea/modules.xml
+/.idea/vcs.xml
+/.idea/VGC-Team-Helper.iml
