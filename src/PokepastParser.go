@@ -165,6 +165,7 @@ func parse(pokeInfo string, flag bool) Pokemon {
 
 	//TODO: name regex needs to factor in for a space
 	nameItemRegex := regexp.MustCompile(`^(\w+(?:[ -]\w+)*)(\s(\(M\)|\(F\)))* @ (.+)`)
+	nameItemRegexFromNickname := regexp.MustCompile(`\((\w+(?:[ -]\w+)*)\)(\s(\(M\)|\(F\)))* @* (.+)*`)
 	nameRegex := regexp.MustCompile(`^(\w+(?:[ -]\w+)*)(\s(\(M\)|\(F\)))*`)
 	abilityRegex := regexp.MustCompile(`Ability: (.+)`)
 	levelRegex := regexp.MustCompile(`Level: (\d+)`)
@@ -182,6 +183,17 @@ func parse(pokeInfo string, flag bool) Pokemon {
 		p.Item = matches[len(matches)-1]
 	} else if matches := nameRegex.FindStringSubmatch(pokeInfo); len(matches) > 1 {
 		p.Name = matches[1]
+	} else {
+		// Parse in case for a nickname
+		if matches := nameItemRegexFromNickname.FindStringSubmatch(pokeInfo); len(matches) > 2 {
+			p.Name = matches[1]
+			p.Item = matches[len(matches)-1]
+			// No item
+		} else if matches := nameRegex.FindStringSubmatch(pokeInfo); len(matches) > 1 {
+			p.Name = matches[1]
+		} else {
+			log.Panicln("Pokemon name and item could not be parsed.")
+		}
 	}
 
 	// Parse type(s)
