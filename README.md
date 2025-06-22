@@ -3,17 +3,9 @@ Website: [VGC Team Helper](https://vgcteamhelper.com/)
 
 Please consider leaving a Watch or a Star if you're interested in following this project!
 
-## Version: 1.1.1
+## Version: 1.1.3
 New to this update:
-1. Additional links to VGC resources.
-2. Fixes UI bug where Paradox Pokemon and Urshifu wouldn't have their images shown in the report.
-3. Analysis of your team's offensive capabilities against the top Pokemon in
-the current metagame. 
-4. Changes to the report to decrease verbosity.
-5. Changes to the overall scoring algorithm to reflect the strength of a team against
-other Pokemon in the metagame.
-6. Changes to the overall scoring algorithm that increases scaling factor in mode scoring, 
-core scoring, and support scoring.
+1. Fixes a bug where Pokepastes containing Pokemon nicknames would not allow for the nicknamed Pokemon's image to appear in the report.
 
 ## License
 See the License [here](./LICENSE).

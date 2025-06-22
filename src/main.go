@@ -31,6 +31,9 @@ type Meta struct {
 func enableCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		//TODO
+
+		// Line below for debugging
+		//w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:8008")
 		w.Header().Set("Access-Control-Allow-Origin", "https://vgcteamhelper.com")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
