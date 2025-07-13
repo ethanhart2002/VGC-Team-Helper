@@ -129,7 +129,6 @@ func fetchPokemonData(pokemonName string) (*http.Response, error) {
 
 // GetPokemonType fetches and returns the types of a given Pokémon
 func GetPokemonType(pokemonName string) ([]string, error) {
-
 	// Send GET request through a special function
 	response, err := fetchPokemonData(pokemonName)
 	if err != nil {
@@ -161,12 +160,27 @@ func GetPokemonType(pokemonName string) ([]string, error) {
 	return types, nil
 }
 
-func parse(pokeInfo string, flag bool) Pokemon {
+func Parse(pokeInfo string, flag bool) Pokemon {
 
 	//TODO: name regex needs to factor in for a space
-	nameItemRegex := regexp.MustCompile(`^(\w+(?:[ -]\w+)*)(\s(\(M\)|\(F\)))* @ (.+)`)
-	nameItemRegexFromNickname := regexp.MustCompile(`\((\w+(?:[ -]\w+)*)\)(\s(\(M\)|\(F\)))* @* (.+)*`)
-	nameRegex := regexp.MustCompile(`^(\w+(?:[ -]\w+)*)(\s(\(M\)|\(F\)))*`)
+
+	// Name item
+	nameItemRegex := regexp.MustCompile(`^([\w -]+)(?:\s\([MF]\))?\s@\s([\w -]+)\s*$`)
+
+	// Name
+	nameRegex := regexp.MustCompile(`^([\w -]+)(?:\s\([MF]\))?\s*$`)
+
+	// Nickname name
+	nameWithNickname := regexp.MustCompile(`^(?:[\w -]+)?\s\(([\w -]+)\)(?:\s\([MF]\))?\s*$`)
+
+	// Nickname name item
+	nameItemWithNickname := regexp.MustCompile(`^(?:[\w -]+)?\s\(([\w -]+)\)(?:\s\([MF]\))?\s@\s([\w -]+)\s*$`)
+
+	// Legacy name matching below
+	//nameItemRegex := regexp.MustCompile(`^(\w+(?:[ -]\w+)*)(\s(\(M\)|\(F\)))* @ (.+)`)
+	//nameItemRegexFromNickname := regexp.MustCompile(`\((\w+(?:[ -]\w+)*)\)(\s(\(M\)|\(F\)))* @* (.+)*`)
+	//nameRegex := regexp.MustCompile(`^(\w+(?:[ -]\w+)*)(\s(\(M\)|\(F\)))*`)
+
 	abilityRegex := regexp.MustCompile(`Ability: (.+)`)
 	levelRegex := regexp.MustCompile(`Level: (\d+)`)
 	teraTypeRegex := regexp.MustCompile(`Tera Type: (\w+)`)
@@ -177,27 +191,66 @@ func parse(pokeInfo string, flag bool) Pokemon {
 	// Initialize a new Pokemon instance
 	var p Pokemon
 
-	// Parse name and item, or just name if no item is listed
-	if matches := nameItemRegex.FindStringSubmatch(pokeInfo); len(matches) > 2 {
-		p.Name = matches[1]
-		p.Item = matches[len(matches)-1]
-	} else if matches := nameRegex.FindStringSubmatch(pokeInfo); len(matches) > 1 {
-		p.Name = matches[1]
-	} else {
-		// Parse in case for a nickname
-		if matches := nameItemRegexFromNickname.FindStringSubmatch(pokeInfo); len(matches) > 2 {
-			p.Name = matches[1]
-			p.Item = matches[len(matches)-1]
-			// No item
-		} else if matches := nameRegex.FindStringSubmatch(pokeInfo); len(matches) > 1 {
-			p.Name = matches[1]
-		} else {
-			log.Panicln("Pokemon name and item could not be parsed.")
+	lines := strings.SplitN(pokeInfo, "\n", -1)
+	first := lines[0]
+
+	nameMatches := nameRegex.FindStringSubmatch(first)
+
+	nameItemMatches := nameItemRegex.FindStringSubmatch(first)
+
+	nameWithNicknameMatches := nameWithNickname.FindStringSubmatch(first)
+
+	nameItemWithNicknameMatches := nameItemWithNickname.FindStringSubmatch(first)
+
+	if len(nameItemWithNicknameMatches) > 0 {
+		name := nameItemWithNicknameMatches[1]
+		// Same comment as above ^
+		if !(name == "F" || name == "M") {
+			p.Name = name
+			p.Item = nameItemWithNicknameMatches[2]
+		}
+	} else if len(nameWithNicknameMatches) > 0 {
+		name := nameWithNicknameMatches[1]
+		// Necessary because Go doesn't support negative lookahead. This will be matched by nameMatches a few lines in advance from here
+		if !(name == "F" || name == "M") {
+			p.Name = name
 		}
 	}
 
+	// separate if-statement as an edge case. Go regex doesn't support AND operations so <name> <gender> <item> is matched twice, have to explicitly check above, and then
+	// execution follows here to where the name and item are correctly parsed
+	if len(nameItemMatches) > 0 {
+		p.Name = nameItemMatches[1]
+		p.Item = nameItemMatches[2]
+	} else if len(nameMatches) > 0 {
+		p.Name = nameMatches[1]
+	}
+
+	//// Parse name and item, or just name if no item is listed
+	//if matches := nameItemRegex.FindStringSubmatch(pokeInfo); len(matches) > 2 {
+	//	p.Name = matches[1]
+	//	p.Item = matches[len(matches)-1]
+	//} else if matches := nameRegex.FindStringSubmatch(pokeInfo); len(matches) > 1 {
+	//	p.Name = matches[1]
+	//} else {
+	//	// Parse in case for a nickname
+	//	if matches := nameItemRegexFromNickname.FindStringSubmatch(pokeInfo); len(matches) > 2 {
+	//		p.Name = matches[1]
+	//		fmt.Println(matches[1])
+	//		p.Item = matches[len(matches)-1]
+	//		//println(matches[2])
+	//		// No item
+	//	} else if matches := nameItemRegexFromNickname.FindStringSubmatch(pokeInfo); len(matches) > 1 {
+	//		p.Name = matches[1]
+	//		fmt.Println(matches[1])
+	//	} else {
+	//		fmt.Println(matches)
+	//		log.Panicln("Pokemon name and item could not be parsed.")
+	//	}
+	//}
+
 	// Parse type(s)
-	types, err := GetPokemonType(strings.ToLower(p.Name))
+	types, err := GetPokemonType(strings.TrimSpace(strings.ToLower(p.Name)))
 	if err != nil {
 		p.Type = append(p.Type, "Error: Couldn't lookup the type for this Pokemon.")
 	} else {
@@ -268,7 +321,6 @@ func RunParser(path string) ([]Pokemon, string) {
 		log.Fatal(err)
 	}
 
-	// Get the OTS/CTS flag
 	doc.Find("head").Each(func(i int, s *goquery.Selection) {
 		if strings.Contains(s.Text(), "(OTS)") {
 			OtsFlag = true
@@ -278,7 +330,7 @@ func RunParser(path string) ([]Pokemon, string) {
 	doc.Find("article").Each(func(i int, s *goquery.Selection) {
 		var member Pokemon
 		pokeInfo := s.Find("pre").Text()
-		member = parse(pokeInfo, OtsFlag)
+		member = Parse(pokeInfo, OtsFlag)
 		team = append(team, member)
 		x, err := json.MarshalIndent(member, "", " ")
 		if err != nil {

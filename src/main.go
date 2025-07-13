@@ -33,7 +33,7 @@ func enableCors(next http.Handler) http.Handler {
 		//TODO
 
 		// Line below for debugging
-		//w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:8008")
+		// w.Header().Set("Access-Control-Allow-Origin", "http://127.0.0.1:8008")
 		w.Header().Set("Access-Control-Allow-Origin", "https://vgcteamhelper.com")
 		w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
@@ -159,7 +159,7 @@ func main() {
 
 	http.HandleFunc("/analyze", analyze)
 
-	//For running locally, go to script.js to uncomment the local debug line that reads 'hostPath = "http://localhost:443/analyze";'
+	//For running locally, go to script.js to uncomment the local debug line that reads 'hostPath = ...;' under 'let hostPath = "https://vgcteamhelper.com/analyze";'
 	err := http.ListenAndServe(":443", nil)
 	if err != nil {
 		log.Fatalf("Error starting server: %s", err)

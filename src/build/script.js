@@ -116,8 +116,9 @@ document.addEventListener("DOMContentLoaded", function () {
             const structElement = document.createElement("div");
             structElement.classList.add("pokemon-container"); // Add class for styling
 
+            const pokemon = struct.pokemon.trim()
             //ternary statement that determines if a name translation for pokemondb is needed.
-            const pokemonName = struct.pokemon in nameDict ? nameDict[struct.pokemon] : struct.pokemon;
+            const pokemonName =  pokemon in nameDict ? nameDict[pokemon] : pokemon;
             const spriteUrl = `https://img.pokemondb.net/sprites/scarlet-violet/normal/${pokemonName.toLowerCase()}.png`;
 
             const img = document.createElement('img');
@@ -253,7 +254,7 @@ document.addEventListener("DOMContentLoaded", function () {
         let hostPath = "https://vgcteamhelper.com/analyze";
 
         // local debug - uncomment line below.
-        // hostPath = "http://127.0.0.1:443/analyze";
+        // hostPath = "http://127.0.0.1:8008/analyze";
 
         try {
             const response = await fetch(hostPath, {

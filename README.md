@@ -3,10 +3,11 @@ Website: [VGC Team Helper](https://vgcteamhelper.com/)
 
 Please consider leaving a Watch or a Star if you're interested in following this project!
 
-## Known Issue
-Pokemon images will not fetch and names/items can't be parsed if the Pokepaste contains nicknames. 
+## Known Issues
+None at the moment...
 
-## Version: 1.1.3
+## Version: 1.1.4
+Fixed issue where submitted teams with nicknames couldn't have their images parsed.
 
 ## License
 See the License [here](./LICENSE).
