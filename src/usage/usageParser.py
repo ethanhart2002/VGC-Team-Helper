@@ -2,8 +2,8 @@ import requests
 
 # URL to a specific month's stats (modify as needed)
 BASE_URL = "https://www.smogon.com/stats"
-MONTH = "2025-05"
-FILE = "gen9vgc2025regi-0"
+MONTH = "2025-08"
+FILE = "gen9vgc2025regh-0"
 
 url = f"{BASE_URL}/{MONTH}/{FILE}.txt"
 
